@@ -58,7 +58,7 @@ Description: Readme last updated: March 23, 2020
         
         While it is a theoretically possible pattern, harmonies of that type are unattested in natural languages.
         
-        **Morphology** avoids center-embedding as well. In [Aksënova et al. (2016)](https://www.aclweb.org/anthology/W16-2019) we show that it is possible to iterate prefixes with the meaning "after" in Russian. In Ilocano, where the same semantics is expressed via a circumfix, its iteration is prohibited.
+        **Morphology** avoids center-embedding as well. In [AksÃ«nova et al. (2016)](https://www.aclweb.org/anthology/W16-2019) we show that it is possible to iterate prefixes with the meaning "after" in Russian. In Ilocano, where the same semantics is expressed via a circumfix, its iteration is prohibited.
             
             RUSSIAN: "zavtra" (tomorrow), "posle-zavtra" (the day after tomorrow), 
                      "posle-posle-zavtra" (the day after the day after tomorrow), ...
@@ -112,16 +112,16 @@ Description: Readme last updated: March 23, 2020
         
         **Luganda verb and noun combinations** ([Hyman and Katamba (2010)](http://linguistics.berkeley.edu/phonlab/documents/2010/Hyman_Katamba_Paris_PLAR.pdf), cited by [Jardine (2016)](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/B01C656A2B96316F3ADCC836BD2A6244/S0952675716000129a.pdf/computationally_tone_is_different.pdf))
         
-          * /tw-áa-mú-láb-a, walúsimbi/ ---> tw-áá-mu-lab-a, walúsimbi <br>
-            ‘we saw him, Walusimbi’ <br>
+          * /tw-Ã¡a-mÃº-lÃ¡b-a, walÃºsimbi/ ---> tw-Ã¡Ã¡-mu-lab-a, walÃºsimbi <br>
+            â€˜we saw him, Walusimbiâ€™ <br>
             **HHLLL, LHLL**
             
-          * /tw-áa-láb-w-a walúsimbi/ ---> tw-áá-láb-wá wálúsimbi <br>
-            ‘we were seen by Walusimbi’ <br>
+          * /tw-Ã¡a-lÃ¡b-w-a walÃºsimbi/ ---> tw-Ã¡Ã¡-lÃ¡b-wÃ¡ wÃ¡lÃºsimbi <br>
+            â€˜we were seen by Walusimbiâ€™ <br>
             **HHHHHHLL**
             
-          * /tw-áa-láb-a byaa=walúsimbi/ ---> tw-áá-láb-á byáá-wálúsimbi <br>
-            ‘we saw those of Walusimbi’ <br>
+          * /tw-Ã¡a-lÃ¡b-a byaa=walÃºsimbi/ ---> tw-Ã¡Ã¡-lÃ¡b-Ã¡ byÃ¡Ã¡-wÃ¡lÃºsimbi <br>
+            â€˜we saw those of Walusimbiâ€™ <br>
             **HHHHHHHHLL**
             
         This pattern can be described using SP grammar `*HLH`.
@@ -549,7 +549,7 @@ Description: Readme last updated: March 23, 2020
         
         ## Multiple tier-based strictly local languages
         
-        There are numerous examples from the typological literature that show that there are phonological patterns complexity of which is beyond the power of TSL languages. The example could be any pattern where several long-distance dependencies affect different sets of elements, see [McMullin (2016)](https://www.dropbox.com/s/txmk4efif9f5bvb/McMullin_Dissertation_UBC.pdf?dl=0) and [Aksënova and Deshmukh (2018)](https://www.aclweb.org/anthology/W18-0307.pdf) for examples and discussions of those patterns.
+        There are numerous examples from the typological literature that show that there are phonological patterns complexity of which is beyond the power of TSL languages. The example could be any pattern where several long-distance dependencies affect different sets of elements, see [McMullin (2016)](https://www.dropbox.com/s/txmk4efif9f5bvb/McMullin_Dissertation_UBC.pdf?dl=0) and [AksÃ«nova and Deshmukh (2018)](https://www.aclweb.org/anthology/W18-0307.pdf) for examples and discussions of those patterns.
         
         
         **Two features spread, only one of them can be blocked**
@@ -758,7 +758,7 @@ Description: Readme last updated: March 23, 2020
         
         **Acknowledgments** 
         
-        I am very grateful to [_Thomas Graf_](https://thomasgraf.net/), [_Kyle Gorman_](http://www.wellformedness.com/), [_Jeffrey Heinz_](http://jeffreyheinz.net/), [_Aniello De Santo_](https://aniellodesanto.github.io/about/) and _Ayla Karakaş_ whose input on different parts of this project was extremely helpful.
+        I am very grateful to [_Thomas Graf_](https://thomasgraf.net/), [_Kyle Gorman_](http://www.wellformedness.com/), [_Jeffrey Heinz_](http://jeffreyheinz.net/), [_Aniello De Santo_](https://aniellodesanto.github.io/about/) and _Ayla KarakaÅŸ_ whose input on different parts of this project was extremely helpful.
         
 Keywords: language grammar subregular subsequential transducer induction
 Platform: UNKNOWN
