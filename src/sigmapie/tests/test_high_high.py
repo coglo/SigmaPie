@@ -37,4 +37,3 @@ def test_high_high_sp():
     evaluate_wfd_words(sl_h.generate_sample(n=1000))
     evaluate_wfd_words(tsl_h.generate_sample(n=1000))
     evaluate_wfd_words(mtsl_h.generate_sample(n=1000))
-    # Comment
