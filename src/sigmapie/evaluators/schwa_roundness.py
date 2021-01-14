@@ -18,7 +18,7 @@ def evaluate_sro_words(data):
             correct += 1
  
     ratio = (correct / len(data))
-    print(f"Percentage of well-formed words: {int(ratio * 100)}%.")
+    print(f"Percentage of sro well-formed words: {int(ratio * 100)}%.")
 
 
 def evaluate_sro_io(data):
@@ -45,4 +45,4 @@ def evaluate_sro_io(data):
             correct += 0
         
     ratio = (correct / len(data))
-    print(f"Percentage of well-formed words: {int(ratio * 100)}%.")
+    print(f"Percentage of sro_io well-formed words: {int(ratio * 100)}%.")

@@ -1,6 +1,6 @@
 from random import choice
 
-def no_cor_cor(sigma = ("a", "n", "y", "i"), length = 4):
+def no_cor_cor(sigma = ["a", "n", "y", "i"], length = 4):
     """
     This function generates either a word grammatical with respect to a rule
     of no_cor_cor.
@@ -12,19 +12,20 @@ def no_cor_cor(sigma = ("a", "n", "y", "i"), length = 4):
     Outputs:
     * str: a string representing the application of the no_cor_cor constraint. 
     """
-
     if length < 1:
         raise ValueError("The string has a very weird length.")
-        
-    string = "".join([choice(sigma) for i in range(length)])
-    
-    n = string.count("y") + string.count("i")
-    if n>1:
-        return None
-    else:
-        return (string)  
 
-def generate_ncc(n = 10, sigma = ("a", "n", "y", "i"), length = 4):
+    word = []
+    for i in range(length):
+        selection = choice(sigma)
+        if selection in ['y', 'i']:
+            sigma.remove('y')
+            sigma.remove('i')
+        word.append(selection)
+    string = "".join(word)
+    return(string)
+
+def generate_ncc(n = 10, sigma = ["a", "n", "y", "i"], length = 4):
     """
     Generates a set of strings or pairs that satisfy the rule of
     the no_cor_cor.

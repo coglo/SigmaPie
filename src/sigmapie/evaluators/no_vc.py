@@ -11,13 +11,13 @@ def evaluate_nvc_words(data):
     """
     correct = 0
     for w in data:
-        if "t" in string and "a" in string:
-            n = string.index("t")
-            m = string.index("a")
+        if "t" in w and "a" in w:
+            n = w.index("t")
+            m = w.index("a")
             if n > m:
                 correct += 0
         else:
             correct += 1
  
     ratio = (correct / len(data))
-    print(f"Percentage of well-formed words: {int(ratio * 100)}%.")
+    print(f"Percentage of nvc well-formed words: {int(ratio * 100)}%.")

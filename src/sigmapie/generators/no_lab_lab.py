@@ -1,6 +1,6 @@
 from random import choice
 
-def no_lab_lab(sigma = ("a", "n", "y", "u"), length = 4):
+def no_lab_lab(sigma = ["a", "n", "y", "u"], length = 4):
     """
     This function generates either a word grammatical with respect to a rule
     of no_lab_lab.
@@ -15,16 +15,18 @@ def no_lab_lab(sigma = ("a", "n", "y", "u"), length = 4):
 
     if length < 1:
         raise ValueError("The string has a very weird length.")
-        
-    string = "".join([choice(sigma) for i in range(length)])
-    
-    n = string.count("y") + string.count("u")
-    if n>1:
-        return None
-    else:
-        return (string)  
 
-def generate_nll(n = 10, sigma = ("a", "n", "y", "u"), length = 4):
+    word = []
+    for i in range(length):
+        selection = choice(sigma)
+        if selection in ['y', 'u']:
+            sigma.remove('y')
+            sigma.remove('u')
+        word.append(selection)
+    string = "".join(word)
+    return(string)
+
+def generate_nll(n = 10, sigma = ["a", "n", "y", "u"], length = 4):
     """
     Generates a set of strings or pairs that satisfy the rule of
     the no_lab_lab.

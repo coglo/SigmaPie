@@ -6,7 +6,7 @@ a → ɑ / _ u, ŋ
 
 '''
 
-def vowel_frontness(sigma = ("a", "ə", "i", "y",  "e", "n", "ɑ", "u", "ŋ"), length = 4):
+def vowel_frontness(sigma = ["a", "ə", "i", "y",  "e", "n", "ɑ", "u", "ŋ"], length = 4):
     """
     This function generates either a word grammatical with respect to a rule
     of vowel_frontness harmony.
@@ -45,7 +45,7 @@ def vowel_frontness(sigma = ("a", "ə", "i", "y",  "e", "n", "ɑ", "u", "ŋ"), l
     else:
         return (string)  
 
-def vowel_frontness_io(sigma = ("a", "ə", "i", "y",  "e", "n", "ɑ", "u", "ŋ"), length = 4):
+def vowel_frontness_io(sigma = ["a", "ə", "i", "y",  "e", "n", "ɑ", "u", "ŋ"], length = 4):
     """
     This generator generates the fake input and output pairs of Mandarin syllable.
     
@@ -82,7 +82,7 @@ def vowel_frontness_io(sigma = ("a", "ə", "i", "y",  "e", "n", "ɑ", "u", "ŋ")
     else:
         return ((string, string))  
 
-def generate_vfr(n = 10, sigma = ("a", "ə", "i", "y",  "e", "n", "ɑ", "u", "ŋ"), length = 4):
+def generate_vfr(n = 10, sigma = ["a", "ə", "i", "y",  "e", "n", "ɑ", "u", "ŋ"], length = 4):
     """
     Generates a set of strings that satisfy the rule of
     the vowel_frontness harmony.
@@ -96,7 +96,7 @@ def generate_vfr(n = 10, sigma = ("a", "ə", "i", "y",  "e", "n", "ɑ", "u", "ŋ
     """
     return [vowel_frontness(sigma, length) for i in range(n)]
 
-def generate_vfr_io(n = 10, sigma = ("a", "ə", "i", "y",  "e", "n", "ɑ", "u", "ŋ"), length = 4):
+def generate_vfr_io(n = 10, sigma = ["a", "ə", "i", "y",  "e", "n", "ɑ", "u", "ŋ"], length = 4):
     """
     Generates a set of pairs that satisfy the rule of
     the vowel_frontness harmony.
