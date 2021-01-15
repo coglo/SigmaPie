@@ -22,10 +22,10 @@ def schwa_roundness(sigma = ["a", "n", "ə", "u"], length = 4):
     string = "".join([choice(sigma) for i in range(length)])
     word = ">" + string + "<"
     if "uə<" in word:
-        word.replace("uə<", "uo<")
+        word = word.replace("uə<", "uo<")
         return (word[1:5])
     if "əu" in word:
-        word.replace("əu", "ou")
+        word = word.replace("əu", "ou")
         return (word[1:5])
     else:
         return (string)  
@@ -48,10 +48,10 @@ def schwa_roundness_io(sigma = ["a", "n", "ə", "u"], length = 4):
     word = ">" + string + "<"
     
     if "uə<" in word:
-        word.replace("uə<", "uo<")
+        word = word.replace("uə<", "uo<")
         return ((string, word[1:5]))
     if "əu" in word:
-        word.replace("əu", "ou")
+        word = word.replace("əu", "ou")
         return ((string, word[1:5]))
     else:
         return ((string, string))  
