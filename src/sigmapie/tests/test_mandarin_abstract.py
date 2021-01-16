@@ -16,6 +16,7 @@ from sigmapie.tsl_class import TSL
 from sigmapie.mtsl_class import MTSL
 import pytest
 
+
 def evaluate_models(evaluator, data, tsl=True):
     
     sp_h = SP()

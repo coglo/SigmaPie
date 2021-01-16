@@ -12,7 +12,7 @@ from sigmapie.fsm import *
 from sigmapie.grammar import *
 
 
-class SL(L):
+class SL(L):  # all the methods of L are in SL too.
     """A class for strictly local grammars and languages.
 
     Attributes:
