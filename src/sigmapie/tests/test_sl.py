@@ -10,7 +10,7 @@ option) any later version.
 """
 
 import unittest
-from sl_class import *
+from sigmapie.sl_class import *
 
 
 class TestSLLanguages(unittest.TestCase):
@@ -215,3 +215,6 @@ class TestSLLanguages(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+#python src\sigmapie\tests\test_sl.py (run)
+#= pytest src\sigmapie\tests\test_sl.py -s (run)

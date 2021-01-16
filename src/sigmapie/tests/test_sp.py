@@ -10,7 +10,7 @@ option) any later version.
 """
 
 import unittest
-from sp_class import *
+from sigmapie.sp_class import *
 
 
 class TestSPLanguages(unittest.TestCase):

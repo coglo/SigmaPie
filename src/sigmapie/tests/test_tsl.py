@@ -10,7 +10,7 @@ option) any later version.
 """
 
 import unittest
-from tsl_class import *
+from sigmapie.tsl_class import *
 
 
 class TestTSLLanguages(unittest.TestCase):
