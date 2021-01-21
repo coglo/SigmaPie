@@ -12,9 +12,7 @@ def evaluate_sro_words(data):
     correct = 0
     for w in data:
         word = ">" + w + "<"
-        if "uə<" in word or "əu" in word:
-            correct += 0
-        else:
+        if "uə<" not in word and "əu" not in word: 
             correct += 1
  
     ratio = (correct / len(data))
@@ -41,8 +39,6 @@ def evaluate_sro_io(data):
 
         if "uə<" not in SF1 and "əu" not in SF1:
             correct += 1
-        else:
-            correct += 0
         
     ratio = (correct / len(data))
     print(f"Percentage of sro_io well-formed words: {int(ratio * 100)}%.")

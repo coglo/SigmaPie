@@ -1,6 +1,6 @@
 from random import choice
 
-def no_vc(sigma = ["a", "n", "t"], length = 4):
+def no_vc(length = 4):
     """
     This function generates either a word grammatical with respect to a rule
     of no_vc.
@@ -12,6 +12,7 @@ def no_vc(sigma = ["a", "n", "t"], length = 4):
     Outputs:
     * str: a string representing the application of the no_vc constraint. 
     """
+    sigma = ["a", "n", "t"]
     if length < 1:
         raise ValueError("The string has a very weird length.")
 
@@ -27,7 +28,7 @@ def no_vc(sigma = ["a", "n", "t"], length = 4):
     string = "".join(word)
     return(string)
 
-def generate_nvc(n = 10, sigma = ["a", "n", "t"], length = 4):
+def generate_nvc(n = 10, length = 4):
     """
     Generates a set of strings or pairs that satisfy the rule of
     the no_vc.
@@ -39,4 +40,6 @@ def generate_nvc(n = 10, sigma = ["a", "n", "t"], length = 4):
     Outputs:
     * list: a list of strings representing the application of no_vc.
     """
-    return [no_vc(sigma, length) for i in range(n)]
+    return [no_vc(length) for i in range(n)]
+
+print(generate_nvc(n = 10, length = 4))

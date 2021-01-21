@@ -12,7 +12,7 @@ def no_lab_lab(length = 4):
     Outputs:
     * str: a string representing the application of the no_lab_lab constraint. 
     """
-    sigma = ["a", "n", "y", "u"]
+    sigma = ["n", "y", "u"]
 
     if length < 1:
         raise ValueError("The string has a very weird length.")
@@ -41,4 +41,4 @@ def generate_nll(n = 10, length = 4):
     """
     return [no_lab_lab(length=length) for i in range(n)]
 
-#print(generate_nll(n = 100))
+print(generate_nll(n = 10))

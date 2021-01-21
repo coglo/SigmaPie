@@ -31,8 +31,17 @@ def get_mandarin_nonwords():
         reader = csv.reader(f)
         return [word[0] for word in list(reader)]
 
-def test_no_lab_lab():
+data = get_mandarin_words()
+datan = get_mandarin_nonwords()
 
+def evaluate_models(evaluator, data, tsl=True):
+    
+    '''
+    sp_h = SP(polar="n")
+    sl_h = SL(polar="n")
+    tsl_h = TSL(polar="n")
+    mtsl_h = MTSL(polar="n")
+    '''
     data = get_mandarin_words()
     datan = get_mandarin_nonwords()
 
@@ -56,146 +65,54 @@ def test_no_lab_lab():
     tsl_h.learn()
     mtsl_h.learn()
 
-    evaluate_nll_words(data)
-    evaluate_nll_words(datan)
+    evaluator(data)
+    evaluator(sl_h.generate_sample(n=100, repeat=True))
+    evaluator(sp_h.generate_sample(n=100, repeat=True))
+    if tsl:
+        evaluator(tsl_h.generate_sample(n=100, repeat=True))
+    evaluator(mtsl_h.generate_sample(n=100, repeat=True))
+    
+    print("SL k:", sl_h.k)
+    print("SL sample:", sl_h.generate_sample(5, repeat=False), "\n")
+    print("SP sample:", sp_h.generate_sample(5, repeat=False), "\n")
+    if tsl:
+        print("TSL tier:", tsl_h.tier)
+        print("TSL sample:", tsl_h.generate_sample(5, repeat=False), "\n")
+    print("MTSL tiers:", mtsl_h.tier)
+    print("MTSL sample:", mtsl_h.generate_sample(5, repeat=False))
+    '''
+    print("SL alphabet:", sl_h.alphabet)
+    print("SP alphabet:", sp_h.alphabet)
+    if tsl:
+        print("TSL alphabet:", tsl_h.alphabet)
+    print("MTSL alphabet:", mtsl_h.alphabet)
+
+    print("SL grammar:", sl_h.grammar)
+    print("SP grammar:", sp_h.grammar)
+    print("TSL grammar:", tsl_h.grammar)
+    print("MTSL grammar:", mtsl_h.grammar)
+    '''
+    print("SL polarity:", sl_h.check_polarity())
+    print("SP polarity:", sp_h.check_polarity())
+    if tsl:
+        print("TSL polarity:", tsl_h.check_polarity())
+    print("MTSL polarity:", mtsl_h.check_polarity())
+
+def test_no_lab_lab():
+    evaluate_models(evaluate_nll_words, data)
+    #evaluate_nll_words(datan)
 
 def test_no_cor_cor():
-
-    data = get_mandarin_words()
-    datan = get_mandarin_nonwords()
-
-    sp_h = SP()
-    sl_h = SL()
-    tsl_h = TSL()
-    mtsl_h = MTSL()
-
-    sp_h.data = data
-    sl_h.data = data
-    tsl_h.data = data
-    mtsl_h.data = data
-    
-    sp_h.extract_alphabet()
-    sl_h.extract_alphabet()
-    tsl_h.extract_alphabet()
-    mtsl_h.extract_alphabet()
-    
-    sp_h.learn()
-    sl_h.learn()
-    tsl_h.learn()
-    mtsl_h.learn()
-
-    evaluate_ncc_words(data)
-    evaluate_ncc_words(datan)
+    evaluate_models(evaluate_ncc_words, data)
 
 def test_no_high_high():
-
-    data = get_mandarin_words()
-    datan = get_mandarin_nonwords()
-
-    sp_h = SP()
-    sl_h = SL()
-    tsl_h = TSL()
-    mtsl_h = MTSL()
-
-    sp_h.data = data
-    sl_h.data = data
-    tsl_h.data = data
-    mtsl_h.data = data
-    
-    sp_h.extract_alphabet()
-    sl_h.extract_alphabet()
-    tsl_h.extract_alphabet()
-    mtsl_h.extract_alphabet()
-    
-    sp_h.learn()
-    sl_h.learn()
-    tsl_h.learn()
-    mtsl_h.learn()
-
-    evaluate_nhh_words(data)
-    evaluate_nhh_words(datan)
+    evaluate_models(evaluate_nhh_words, data)
 
 def test_no_vc():
-
-    data = get_mandarin_words()
-    datan = get_mandarin_nonwords()
-
-    sp_h = SP()
-    sl_h = SL()
-    tsl_h = TSL()
-    mtsl_h = MTSL()
-
-    sp_h.data = data
-    sl_h.data = data
-    tsl_h.data = data
-    mtsl_h.data = data
-    
-    sp_h.extract_alphabet()
-    sl_h.extract_alphabet()
-    tsl_h.extract_alphabet()
-    mtsl_h.extract_alphabet()
-    
-    sp_h.learn()
-    sl_h.learn()
-    tsl_h.learn()
-    mtsl_h.learn()
-
-    evaluate_nvc_words(data)
-    evaluate_nvc_words(datan)
+    evaluate_models(evaluate_nvc_words, data)
 
 def test_schwa_roundness():
-
-    data = get_mandarin_words()
-    datan = get_mandarin_nonwords()
-
-    sp_h = SP()
-    sl_h = SL()
-    tsl_h = TSL()
-    mtsl_h = MTSL()
-
-    sp_h.data = data
-    sl_h.data = data
-    tsl_h.data = data
-    mtsl_h.data = data
-    
-    sp_h.extract_alphabet()
-    sl_h.extract_alphabet()
-    tsl_h.extract_alphabet()
-    mtsl_h.extract_alphabet()
-    
-    sp_h.learn()
-    sl_h.learn()
-    tsl_h.learn()
-    mtsl_h.learn()
-
-    evaluate_sro_words(data)
-    evaluate_sro_words(datan)
+    evaluate_models(evaluate_sro_words, data, tsl=False)
 
 def test_vowel_frontness():
-
-    data = get_mandarin_words()
-    datan = get_mandarin_nonwords()
-
-    sp_h = SP()
-    sl_h = SL()
-    tsl_h = TSL()
-    mtsl_h = MTSL()
-
-    sp_h.data = data
-    sl_h.data = data
-    tsl_h.data = data
-    mtsl_h.data = data
-    
-    sp_h.extract_alphabet()
-    sl_h.extract_alphabet()
-    tsl_h.extract_alphabet()
-    mtsl_h.extract_alphabet()
-    
-    sp_h.learn()
-    sl_h.learn()
-    tsl_h.learn()
-    mtsl_h.learn()
-
-    evaluate_vfr_words(data)
-    evaluate_vfr_words(datan)
- 
+    evaluate_models(evaluate_vfr_words, data)

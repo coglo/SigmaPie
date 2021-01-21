@@ -12,9 +12,7 @@ def evaluate_ncc_words(data):
     correct = 0
     for w in data:
         n = w.count("y") + w.count("i")
-        if n>1:
-            correct += 0
-        else:
+        if n<=1:
             correct += 1
  
     ratio = (correct / len(data))

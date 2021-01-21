@@ -17,6 +17,9 @@ from sigmapie.mtsl_class import MTSL
 from sigmapie.fst_object import *
 from sigmapie.helper import *
 from sigmapie.ostia import *
+import unittest
+from sigmapie.fsm import FSM
+from random import randint
 
 def pairs_evaluater(data, Sigma, Gamma):
     '''
@@ -38,6 +41,36 @@ def pairs_evaluater(data, Sigma, Gamma):
     print("States:", T.Q)
     print("State outputs:", T.stout)
     print("\nTransitions:", T.E)
+    
+    '''
+    evaluate_sro_io(generate_sro_io(n=100))
+    evaluate_vfr_io(generate_vfr_io(n=100))
+    pairs_evaluater(generate_sro_io(n=100), ["a", "n", "ə", "u"], ["a", "n", "ə", "o", "u"])
+    pairs_evaluater(generate_vfr_io(n=100), ["a", "ə", "i", "y", "n", "u", "ŋ"], ["a", "ə", "i", "y", "e", "n", "ɑ", "u", "ŋ"])
+    '''
+    
+def test_evaluator():
+    o_sro = ostia(generate_sro_io(n=100), ["a", "n", "ə", "u"], ["a", "n", "ə", "o", "u"])
+    o_vfr = ostia(generate_vfr_io(n=100), ["a", "ə", "i", "y", "n", "u", "ŋ"], ["a", "ə", "i", "y", "e", "n", "ɑ", "u", "ŋ"])
+    test_sro = generate_sro_io(n=100)
+    test_vfr = generate_vfr_io(n = 100)
+    success1, failure1 = test_fst(o_sro, test_sro)
+    print("Success_sro:", success1[:15])
+    print("Failure_sro:", failure1[:15])   
+    success2, failure2 = test_fst(o_vfr, test_vfr)
+    print("Success_sro:", success2[:15])
+    print("Failure_sro:", failure2[:15])          
+    print(len(o_sro.E), len(o_sro.stout))
+    print(len(o_vfr.E), len(o_vfr.stout))
 
-pairs_evaluater(generate_sro_io(n=100), ["a", "n", "ə", "u"], ["a", "n", "ə", "o", "u"])
-pairs_evaluater(generate_vfr_io(n=100), ["a", "ə", "i", "y", "n", "u", "ŋ"], ["a", "ə", "i", "y", "e", "n", "ɑ", "u", "ŋ"])
+def test_fst(fst, testdata):
+    success, failure = [], []
+    n = 0
+    for i in testdata:
+        if fst.rewrite(i[0]) == i[1]:
+            success.append(i)
+            n += 1
+        else:
+            failure.append([i, fst.rewrite(i[0])])
+    print("Score:", str(n / len(testdata) * 100) + "%")
+    return success, failure

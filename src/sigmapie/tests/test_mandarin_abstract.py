@@ -19,6 +19,13 @@ import pytest
 
 def evaluate_models(evaluator, data, tsl=True):
     
+    '''
+    sp_h = SP(polar="n")
+    sl_h = SL(polar="n")
+    tsl_h = TSL(polar="n")
+    mtsl_h = MTSL(polar="n")
+    '''
+
     sp_h = SP()
     sl_h = SL()
     tsl_h = TSL()
@@ -40,8 +47,8 @@ def evaluate_models(evaluator, data, tsl=True):
     mtsl_h.learn()
 
     evaluator(data)
-    evaluator(sp_h.generate_sample(n=1000, repeat=True))
     evaluator(sl_h.generate_sample(n=1000, repeat=True))
+    evaluator(sp_h.generate_sample(n=1000, repeat=True))
     if tsl:
         evaluator(tsl_h.generate_sample(n=1000, repeat=True))
     evaluator(mtsl_h.generate_sample(n=1000, repeat=True))
@@ -54,21 +61,22 @@ def evaluate_models(evaluator, data, tsl=True):
         print("TSL sample:", tsl_h.generate_sample(20, repeat=False), "\n")
     print("MTSL tiers:", mtsl_h.tier)
     print("MTSL sample:", mtsl_h.generate_sample(20, repeat=False))
-    print("SP alphabet:", sp_h.alphabet)
     print("SL alphabet:", sl_h.alphabet)
+    print("SP alphabet:", sp_h.alphabet)
     if tsl:
         print("TSL alphabet:", tsl_h.alphabet)
     print("MTSL alphabet:", mtsl_h.alphabet)
-    print("SP alphabet:", sp_h.grammar)
-    print("SL alphabet:", sl_h.grammar)
-    print("TSL alphabet:", tsl_h.grammar)
-    print("MTSL alphabet:", mtsl_h.grammar)
-    print("SP alphabet:", sp_h.check_polarity())
-    print("SL alphabet:", sl_h.check_polarity())
+
+    print("SL grammar:", sl_h.grammar)
+    print("SP grammar:", sp_h.grammar)
+    print("TSL grammar:", tsl_h.grammar)
+    print("MTSL grammar:", mtsl_h.grammar)
+
+    print("SL polarity:", sl_h.check_polarity())
+    print("SP polarity:", sp_h.check_polarity())
     if tsl:
-        print("TSL alphabet:", tsl_h.check_polarity())
-    print("MTSL alphabet:", mtsl_h.check_polarity())
-    print("MTSL tiers:", mtsl_h.tier)
+        print("TSL polarity:", tsl_h.check_polarity())
+    print("MTSL polarity:", mtsl_h.check_polarity())
 
 def test_no_lab_lab():
     evaluate_models(evaluate_nll_words, generate_nll(n=1000))

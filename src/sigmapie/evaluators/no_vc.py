@@ -11,11 +11,11 @@ def evaluate_nvc_words(data):
     """
     correct = 0
     for w in data:
-        if "t" in w and "a" in w:
-            n = w.index("t")
-            m = w.index("a")
-            if n > m:
-                correct += 0
+
+        if 'a' in w:
+            temp_word = w[w.index('a'):]
+            if 't' not in temp_word:
+                correct += 1
         else:
             correct += 1
  

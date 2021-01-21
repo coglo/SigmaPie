@@ -13,12 +13,8 @@ def evaluate_nhh_words(data):
     for w in data:
         n = w.count("y") + w.count("u")
         m = w.count("y") + w.count("i")
-        if n>1:
-            correct += 0
-        elif m>1:
-            correct += 0
-        else:
-            correct += 1
+        if n <= 1 and m <=1:
+            correct +=1
  
     ratio = (correct / len(data))
     print(f"Percentage of nhh well-formed words: {int(ratio * 100)}%.")

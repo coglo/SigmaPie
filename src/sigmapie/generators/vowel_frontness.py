@@ -6,7 +6,7 @@ a → ɑ / _ u, ŋ
 
 '''
 
-def vowel_frontness(sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"], length = 4):
+def vowel_frontness(length = 4):
     """
     This function generates either a word grammatical with respect to a rule
     of vowel_frontness harmony.
@@ -18,6 +18,7 @@ def vowel_frontness(sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"], length = 4):
     Outputs:
     * str: a string representing the application of the vowel_frontness harmony. 
     """
+    sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"]
 
     if length < 1:
         raise ValueError("The string has a very weird length.")
@@ -45,7 +46,7 @@ def vowel_frontness(sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"], length = 4):
     else:
         return (string)  
 
-def vowel_frontness_io(sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"], length = 4):
+def vowel_frontness_io(length = 4):
     """
     This generator generates the fake input and output pairs of Mandarin syllable.
     
@@ -56,6 +57,7 @@ def vowel_frontness_io(sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"], length = 4
     Outputs:
     *fake Mandarin pairs.
     """
+    sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"]
     if length < 1:
         raise ValueError("The string has a very weird length.")
         
@@ -82,7 +84,7 @@ def vowel_frontness_io(sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"], length = 4
     else:
         return ((string, string))  
 
-def generate_vfr(n = 10, sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"], length = 4):
+def generate_vfr(n = 10, length = 4):
     """
     Generates a set of strings that satisfy the rule of
     the vowel_frontness harmony.
@@ -94,9 +96,9 @@ def generate_vfr(n = 10, sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"], length =
     Outputs:
     * list: a list of strings representing the application of vowel_frontness harmony.
     """
-    return [vowel_frontness(sigma, length) for i in range(n)]
+    return [vowel_frontness(length) for i in range(n)]
 
-def generate_vfr_io(n = 10, sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"], length = 4):
+def generate_vfr_io(n = 10, length = 4):
     """
     Generates a set of pairs that satisfy the rule of
     the vowel_frontness harmony.
@@ -108,4 +110,6 @@ def generate_vfr_io(n = 10, sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"], lengt
     Outputs:
     * list: a list of input & output pairs representing the application of vowel_frontness harmony.
     """
-    return [vowel_frontness_io(sigma, length) for i in range(n)]
+    return [vowel_frontness_io(length) for i in range(n)]
+
+print(generate_vfr(n = 10, length = 4))
