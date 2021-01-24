@@ -63,26 +63,30 @@ def vowel_frontness_io(length = 4):
         
     string = "".join([choice(sigma) for i in range(length)])
     word = ">" + string + "<"
+    '''
     if "iə<" in word:
         word = word.replace("iə<", "ie<")
-        return (string, word[1:5])
+        return (string, word[1:length+1])
     if "yə<" in word:
         word = word.replace("yə<", "ye<")
-        return (string, word[1:5])
+        return (string, word[1:length+1])
     if "iən" in word:
         word = word.replace("iən", "ien")
-        return (string, word[1:5])
+        return (string, word[1:length+1])
     if "yən" in word:
         word = word.replace("yən", "yen")
-        return (string, word[1:5]) 
+        return (string, word[1:length+1]) 
     if "au" in word:
         word = word.replace("au", "ɑu")
-        return (string, word[1:5])
+        return (string, word[1:length+1])
     if "aŋ" in word:
         word = word.replace("aŋ", "ɑŋ")
-        return (string, word[1:5])
+        return (string, word[1:length+1])
     else:
-        return ((string, string))  
+        return ((string, string))
+    '''  
+    word = word.replace("iə<", "ie<").replace("yə<", "ye<").replace("iən", "ien").replace("yən", "yen").replace("au", "ɑu").replace("aŋ", "ɑŋ")
+    return ((string, word[1:length+1])) 
 
 def generate_vfr(n = 10, length = 4):
     """
