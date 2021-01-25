@@ -22,7 +22,7 @@ from collections import defaultdict
 import csv
 
 def get_masked_mandarin_words(keep_list=["a", "e", "n", "ɑ","ŋ","n", "ə", "u", "y", "i", "t"]):
-    with open('C:/Users/19061/git/phomo/phomo/mandarin_words.csv', newline='') as f:
+    with open('C:/Users/19061/git/phomo/phomo/mandarin_words.csv', encoding="utf-8-sig", newline='') as f:
         reader = csv.reader(f)
         word_ls = [word[0] for word in list(reader)]
     new_word_list = []
@@ -34,7 +34,7 @@ def get_masked_mandarin_words(keep_list=["a", "e", "n", "ɑ","ŋ","n", "ə", "u"
     return new_word_list
 
 def get_masked_mandarin_nonwords(keep_list=["a", "e", "n", "ɑ", "ŋ", "n", "ə", "u", "y", "i", "t"]):
-    with open('C:/Users/19061/git/phomo/phomo/mandarin_nonwords.csv', newline='') as f:
+    with open('C:/Users/19061/git/phomo/phomo/mandarin_nonwords.csv', encoding="utf-8-sig", newline='') as f:
         reader = csv.reader(f)
         word_ls = [word[0] for word in list(reader)]
     new_word_list = []

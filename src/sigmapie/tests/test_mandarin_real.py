@@ -22,12 +22,12 @@ from collections import defaultdict
 import csv
 
 def get_mandarin_words():
-    with open('C:/Users/19061/git/phomo/phomo/mandarin_words.csv', newline='') as f:
+    with open('C:/Users/19061/git/phomo/phomo/mandarin_words.csv', encoding="utf-8-sig", newline='') as f:
         reader = csv.reader(f)
         return [word[0] for word in list(reader)]
 
 def get_mandarin_nonwords():
-    with open('C:/Users/19061/git/phomo/phomo/mandarin_nonwords.csv', newline='') as f:
+    with open('C:/Users/19061/git/phomo/phomo/mandarin_nonwords.csv', encoding="utf-8-sig", newline='') as f:
         reader = csv.reader(f)
         return [word[0] for word in list(reader)]
 

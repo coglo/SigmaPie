@@ -26,100 +26,71 @@ import collections
 from collections import defaultdict
 import csv
 
-'''
-def evaluate_nll_words(data):
-    """
-    Evaluates the provided words with respect to the rule 
-    of no_lab_lab.
-    
-    Arguments:
-    * data (list[str]): a list of strings tht need to be evaluated;
-                       
-    Results:
-    * Prints the report that shows if the data follows the rule.
-    """
-    correct = []
-    incorrect = []
-    for word in data:
-        n = word.count("y") + word.count("u")
-        if n <=1:
-            correct.append(word)
-        else:
-            incorrect.append(word)
-
-    print("CORRECT", correct)
-    print("INCORRECT", incorrect)
-'''
-
 def evaluate_graphmodels(evaluator, data):
     graph_model = GraphGrammar(data)
-    evaluator(graph_model.generate_sample(10))
+    evaluator(graph_model.generate_sample(1000))
     graph_model.write_dot()
     evaluator(data)
     print("alphabet:", graph_model.alphabet)
     print("restricted pairs:", graph_model.restricted_pairs)
     print("Graphmodel sample:", graph_model.generate_sample(10), "\n")
 
-def test_no_lab_lab():
+def test_no_lab_lab_generated():
     evaluate_graphmodels(evaluate_nll_words, generate_nll(n=1000))
 
-def test_no_cor_cor():
+def test_no_cor_cor_generated():
     evaluate_graphmodels(evaluate_ncc_words, generate_ncc(n=1000))
 
-def test_no_high_high():
+def test_no_high_high_generated():
     evaluate_graphmodels(evaluate_nhh_words, generate_nhh(n=1000))
 
-def test_no_vc():
+def test_no_vc_generated():
     evaluate_graphmodels(evaluate_nvc_words, generate_nvc(n=1000))
 
-def test_schwa_roundness():
+def test_schwa_roundness_generated():
     evaluate_graphmodels(evaluate_sro_words, generate_sro(n=1000))
 
-def test_vowel_frontness():
+def test_vowel_frontness_generated():
     evaluate_graphmodels(evaluate_vfr_words, generate_vfr(n=1000))
 
 
-'''
-
 def get_mandarin_words():
-    with open('C:/Users/19061/git/phomo/phomo/mandarin_words.csv', newline='') as f:
+    with open('C:/Users/19061/git/phomo/phomo/mandarin_words.csv', encoding="utf-8-sig", newline='') as f:
         reader = csv.reader(f)
         return [word[0] for word in list(reader)]
 
 def get_mandarin_nonwords():
-    with open('C:/Users/19061/git/phomo/phomo/mandarin_nonwords.csv', newline='') as f:
+    with open('C:/Users/19061/git/phomo/phomo/mandarin_nonwords.csv', encoding="utf-8-sig", newline='') as f:
         reader = csv.reader(f)
         return [word[0] for word in list(reader)]
 
-#datan = get_mandarin_nonwords()
-
 def test_no_lab_lab():
-    data = get_mandarin_words()
-    evaluate_graphmodels(evaluate_nll_words, data)
+    real_data = get_mandarin_words()
+    evaluate_graphmodels(evaluate_nll_words, real_data)
 
 def test_no_cor_cor():
-    data = get_mandarin_words()
-    evaluate_graphmodels(evaluate_ncc_words, data)
+    real_data = get_mandarin_words()
+    evaluate_graphmodels(evaluate_ncc_words, real_data)
 
 def test_no_high_high():
-    data = get_mandarin_words()
-    evaluate_graphmodels(evaluate_nhh_words, data)
+    real_data = get_mandarin_words()
+    evaluate_graphmodels(evaluate_nhh_words, real_data)
 
 def test_no_vc():
-    data = get_mandarin_words()
-    evaluate_graphmodels(evaluate_nvc_words, data)
+    real_data = get_mandarin_words()
+    evaluate_graphmodels(evaluate_nvc_words, real_data)
 
 def test_schwa_roundness():
-    data = get_mandarin_words()
-    evaluate_graphmodels(evaluate_sro_words, data)
+    real_data = get_mandarin_words()
+    evaluate_graphmodels(evaluate_sro_words, real_data)
 
 def test_vowel_frontness():
-    data = get_mandarin_words()
-    evaluate_graphmodels(evaluate_vfr_words, data)
+    real_data = get_mandarin_words()
+    evaluate_graphmodels(evaluate_vfr_words, real_data)
 
 
 def get_masked_mandarin_words(keep_list=["a", "e", "n", "ɑ","ŋ","n", "ə", "u", "y", "i", "t"]):
-    with open('C:/Users/19061/git/phomo/phomo/mandarin_words.csv', newline='') as f:
+    with open('C:/Users/19061/git/phomo/phomo/mandarin_words.csv', encoding="utf-8-sig", newline='') as f:
         reader = csv.reader(f)
         word_ls = [word[0] for word in list(reader)]
     new_word_list = []
@@ -131,7 +102,7 @@ def get_masked_mandarin_words(keep_list=["a", "e", "n", "ɑ","ŋ","n", "ə", "u"
     return new_word_list
 
 def get_masked_mandarin_nonwords(keep_list=["a", "e", "n", "ɑ", "ŋ", "n", "ə", "u", "y", "i", "t"]):
-    with open('C:/Users/19061/git/phomo/phomo/mandarin_nonwords.csv', newline='') as f:
+    with open('C:/Users/19061/git/phomo/phomo/mandarin_nonwords.csv', encoding="utf-8-sig", newline='') as f:
         reader = csv.reader(f)
         word_ls = [word[0] for word in list(reader)]
     new_word_list = []
@@ -142,30 +113,27 @@ def get_masked_mandarin_nonwords(keep_list=["a", "e", "n", "ɑ", "ŋ", "n", "ə"
         new_word_list.append(word)
     return new_word_list
 
-def test_no_lab_lab():
-    data = get_masked_mandarin_words(keep_list=["n", "u", "y"])
-    datan = get_masked_mandarin_nonwords(keep_list=["n", "u", "y"])
-    evaluate_graphmodels(evaluate_nll_words, data)
+def test_no_lab_lab_masked():
+    mask_data = get_masked_mandarin_words(keep_list=["n", "u", "y"])
+    evaluate_graphmodels(evaluate_nll_words, mask_data)
     #evaluate_nll_words(datan)
 
-def test_no_cor_cor():
-    data = get_masked_mandarin_words(keep_list=["n", "i", "y"])
-    evaluate_graphmodels(evaluate_ncc_words, data)
+def test_no_cor_cor_masked():
+    mask_data = get_masked_mandarin_words(keep_list=["n", "i", "y"])
+    evaluate_graphmodels(evaluate_ncc_words, mask_data)
 
-def test_no_high_high():
-    data = get_masked_mandarin_words(keep_list=["i", "n", "u", "y"])
-    evaluate_graphmodels(evaluate_nhh_words, data)
+def test_no_high_high_masked():
+    mask_data = get_masked_mandarin_words(keep_list=["i", "n", "u", "y"])
+    evaluate_graphmodels(evaluate_nhh_words, mask_data)
 
-def test_no_vc():
-    data = get_masked_mandarin_words(keep_list=["n", "t", "a"])
-    evaluate_graphmodels(evaluate_nvc_words, data)
+def test_no_vc_masked():
+    mask_data = get_masked_mandarin_words(keep_list=["n", "t", "a"])
+    evaluate_graphmodels(evaluate_nvc_words, mask_data)
 
-def test_schwa_roundness():
-    data = get_masked_mandarin_words(keep_list=["n", "ə", "u", "o"])
-    evaluate_graphmodels(evaluate_sro_words, data)
+def test_schwa_roundness_masked():
+    mask_data = get_masked_mandarin_words(keep_list=["n", "ə", "u", "o"])
+    evaluate_graphmodels(evaluate_sro_words, mask_data)
 
-def test_vowel_frontness():
-    data = get_masked_mandarin_words(keep_list=["a", "ə", "e", "ɑ", "i", "y", "n", "u", "ŋ"])
-    evaluate_graphmodels(evaluate_vfr_words, data)
-    
- '''
+def test_vowel_frontness_masked():
+    mask_data = get_masked_mandarin_words(keep_list=["a", "ə", "e", "ɑ", "i", "y", "n", "u", "ŋ"])
+    evaluate_graphmodels(evaluate_vfr_words, mask_data)

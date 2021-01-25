@@ -28,9 +28,9 @@ class GraphGrammar():
         if graph is None:
             graph = nx.DiGraph()
         for i, character in enumerate(word):
-            graph.add_node(character + str(i))
+            graph.add_node(character + "." + str(i))
         for i in range(len(word)-1):
-            graph.add_edge(word[i]+str(i), word[i+1]+str(i+1))
+            graph.add_edge(word[i] + "." + str(i), word[i+1] + "." + str(i+1))
         return graph
 
     def word_list_graph(self, word_list):
@@ -67,7 +67,7 @@ class GraphGrammar():
         for nodes in previous_nodes:
             if not set(combinations(nodes, 2)).intersection(self.restricted_pairs):
                 allowed_ones.append(nodes[-1])
-        return [node + str(i) for node in allowed_ones]
+        return [node + '.' + str(i) for node in allowed_ones]
 
     def generate_word(self, length):
         root_nodes = [node for node in self.graph.nodes() if node[-1] == '0']
@@ -76,11 +76,13 @@ class GraphGrammar():
             # Add a comment here about neighbors and directed edges.
             neighbors = list(self.graph.neighbors(nodes[-1])) 
             if not neighbors:
-                return "".join([node[0] for node in nodes])
-            allowed = self.allowed_neighbors([node[0] for node in nodes], [neighbor[0] for neighbor in neighbors], i)
+                return "".join([node.split('.')[0] for node in nodes])
+            allowed = self.allowed_neighbors([node.split('.')[0] for node in nodes], [neighbor.split('.')[0] for neighbor in neighbors], i)
+            if not allowed:
+                return "".join([node.split('.')[0] for node in nodes])
             next_node = choice(allowed)
             nodes.append(next_node)
-        return "".join([node[0] for node in nodes])
+        return "".join([node.split('.')[0] for node in nodes])
 
     """ 
     def generate_word(self, length):
@@ -107,7 +109,7 @@ class GraphGrammar():
     
     def acceptable(self, word):
         for i in range(len(word)-1):
-            if (word[i]+str(i), word[i+1]+str(i+1)) not in self.graph.edges:
+            if (word[i]+ "." + str(i), word[i+1]+ "." + str(i+1)) not in self.graph.edges:
                 return False
         return True
 
