@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import networkx as nx
 from networkx.drawing.nx_agraph import write_dot
 from sigmapie.evaluators.vowel_frontness import evaluate_vfr_words
@@ -38,6 +39,12 @@ class GraphGrammar():
         for word in word_list:
             self.word_graph(graph, word)
         return graph
+
+    def plot_graph(self):
+        plt.subplot(121)
+        nx.draw(self.graph, with_labels=True, font_weight='bold')
+
+
     '''
     def find_only_once(self, data):
         only_once = self.alphabet

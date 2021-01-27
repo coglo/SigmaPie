@@ -80,8 +80,9 @@ def evaluate_models(evaluator, data, tsl=True):
         print("TSL sample:", tsl_h.generate_sample(5, repeat=False), "\n")
     print("MTSL tiers:", mtsl_h.tier)
     print("MTSL sample:", mtsl_h.generate_sample(5, repeat=False))
-    '''
+
     print("SL alphabet:", sl_h.alphabet)
+    '''
     print("SP alphabet:", sp_h.alphabet)
     if tsl:
         print("TSL alphabet:", tsl_h.alphabet)
@@ -92,6 +93,7 @@ def evaluate_models(evaluator, data, tsl=True):
     print("TSL grammar:", tsl_h.grammar)
     print("MTSL grammar:", mtsl_h.grammar)
     '''
+
     print("SL polarity:", sl_h.check_polarity())
     print("SP polarity:", sp_h.check_polarity())
     if tsl:

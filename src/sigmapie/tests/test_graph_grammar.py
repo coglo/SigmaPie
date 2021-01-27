@@ -35,6 +35,7 @@ def evaluate_graphmodels(evaluator, data):
     print("restricted pairs:", graph_model.restricted_pairs)
     print("Graphmodel sample:", graph_model.generate_sample(10), "\n")
 
+
 def test_no_lab_lab_generated():
     evaluate_graphmodels(evaluate_nll_words, generate_nll(n=1000))
 
@@ -116,7 +117,6 @@ def get_masked_mandarin_nonwords(keep_list=["a", "e", "n", "ɑ", "ŋ", "n", "ə"
 def test_no_lab_lab_masked():
     mask_data = get_masked_mandarin_words(keep_list=["n", "u", "y"])
     evaluate_graphmodels(evaluate_nll_words, mask_data)
-    #evaluate_nll_words(datan)
 
 def test_no_cor_cor_masked():
     mask_data = get_masked_mandarin_words(keep_list=["n", "i", "y"])

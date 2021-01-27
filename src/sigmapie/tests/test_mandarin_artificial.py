@@ -91,7 +91,7 @@ def test_no_vc():
     evaluate_models(evaluate_nvc_words, generate_nvc(n=1000))
 
 def test_schwa_roundness():
-    evaluate_models(evaluate_sro_words, generate_nvc(n=1000), tsl=False)
+    evaluate_models(evaluate_sro_words, generate_sro(n=1000), tsl=False)
 
 @pytest.mark.skip(reason="no way of currently testing this")
 def test_schwa_roundness_io():

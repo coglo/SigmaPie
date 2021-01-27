@@ -24,7 +24,7 @@ def evaluate_vfr_words(data):
 
     # Find the ratio of words with no restrictions to total words.
     ratio = sum([well_formed(word, restrictions) for word in data])/len(data)
-    print(f"Percentage of vfr_ro well-formed words: {int(ratio * 100)}%.")
+    print(f"Percentage of vfr well-formed words: {int(ratio * 100)}%.")
     return ratio
 
 def evaluate_vfr_io(data):

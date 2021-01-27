@@ -21,7 +21,7 @@ import unittest
 from sigmapie.fsm import FSM
 from random import randint
 
-
+'''
 def pairs_evaluater(data, Sigma, Gamma):
  
     T = ostia(data, Sigma, Gamma)
@@ -72,4 +72,3 @@ def test_evaluator():
 
     print(len(o_sro.E), len(o_sro.stout))
     print(len(o_vfr.E), len(o_vfr.stout))
-'''
