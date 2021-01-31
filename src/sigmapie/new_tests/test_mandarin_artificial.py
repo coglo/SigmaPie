@@ -1,5 +1,5 @@
-from sigmapie.generators.no_lab_lab import generate_nll, no_lab_lab
-from sigmapie.evaluators.no_lab_lab import evaluate_nll_words
+from sigmapie.generators.no_lab_lab import generate_nll, no_lab_lab, generate_nll_bad, no_lab_lab_bad
+from sigmapie.evaluators.no_lab_lab import evaluate_nll_words, evaluate_nll_words_bad, evaluate_nll_words_all
 from sigmapie.generators.no_cor_cor import generate_ncc, no_cor_cor
 from sigmapie.evaluators.no_cor_cor import evaluate_ncc_words
 from sigmapie.generators.no_high_high import generate_nhh, no_high_high
@@ -17,8 +17,7 @@ from sigmapie.mtsl_class import MTSL
 import pytest
 
 
-def evaluate_models(evaluator, data, tsl=True):
-    
+def evaluate_models(evaluator, data, tsl=True, evaluated_words):
     '''
     sp_h = SP(polar="n")
     sl_h = SL(polar="n")
@@ -52,6 +51,8 @@ def evaluate_models(evaluator, data, tsl=True):
     if tsl:
         evaluator(tsl_h.generate_sample(n=1000, repeat=True))
     evaluator(mtsl_h.generate_sample(n=1000, repeat=True))
+
+
     
     print("SL k:", sl_h.k)
     print("SL sample:", sl_h.generate_sample(20, repeat=False), "\n")
@@ -77,10 +78,27 @@ def evaluate_models(evaluator, data, tsl=True):
     if tsl:
         print("TSL polarity:", tsl_h.check_polarity())
     print("MTSL polarity:", mtsl_h.check_polarity())
+    
+    sl_h.switch_polarity()
+    print("Polarity of the SL grammar:", sl_h.check_polarity())
+    print("SL grammar:", sl_h.grammar)
+    sp_h.switch_polarity()
+    print("Polarity of the SP grammar:", sp_h.check_polarity())
+    print("SP grammar:", sp_h.grammar)
+    tsl_h.switch_polarity()
+    print("Polarity of the TSL grammar:", tsl_h.check_polarity())
+    print("TSL grammar:", tsl_h.grammar)
+    mtsl_h.switch_polarity()
+    print("Polarity of the MTSL grammar:", mtsl_h.check_polarity())
+
+    print("accuracy of SL evaluator:", sl_h.data_evaluator(evaluated_words))
+
 
 def test_no_lab_lab():
-    evaluate_models(evaluate_nll_words, generate_nll(n=1000))
+    evaluate_models(evaluate_nll_words, generate_nll(n=1000), generate_nll(n=1000))
+    evaluate_models(evaluate_nll_words, generate_nll(n=1000), generate_nll_bad(n=1000)) 
 
+'''
 def test_no_cor_cor():
     evaluate_models(evaluate_ncc_words, generate_ncc(n=1000))
 
@@ -103,3 +121,4 @@ def test_vowel_frontness():
 @pytest.mark.skip(reason="no way of currently testing this")
 def test_vowel_frontness_io():
     evaluate_models(evaluate_vfr_io, generate_vfr_io(n=1000))
+'''

@@ -27,6 +27,22 @@ def no_lab_lab(length = 4):
     string = "".join(word)
     return(string)
 
+def no_lab_lab_bad(length = 4):
+    sigma = ["n", "y", "u"]
+
+    if length < 1:
+        raise ValueError("The string has a very weird length.")
+
+    word = []
+    for i in range(length-2):
+        selection = choice(sigma)
+        word.append(selection)
+    for i in range(2):
+        selection1 = choice(["y","u"])
+        word.append(selection1)
+    string = "".join(word)
+    return(string)
+
 def generate_nll(n = 10, length = 4):
     """
     Generates a set of strings or pairs that satisfy the rule of
@@ -41,4 +57,7 @@ def generate_nll(n = 10, length = 4):
     """
     return [no_lab_lab(length=length) for i in range(n)]
 
-print(generate_nll(n = 10))
+
+def generate_nll_bad(n = 10, length = 4):
+    return [no_lab_lab_bad(length=length) for i in range(n)]
+
