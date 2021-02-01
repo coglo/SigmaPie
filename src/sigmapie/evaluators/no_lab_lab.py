@@ -19,8 +19,7 @@ def evaluate_nll_words(data):
             correct += 1
     sum = len(data) - irrelevant
     ratio = (correct / sum)
-    return ratio * 100
-    #print(f"Percentage of nll well-formed words: {int(ratio * 100)}%.")
+    print(f"Percentage of nll well-formed words: {int(ratio * 100)}%.")
 
 
 '''

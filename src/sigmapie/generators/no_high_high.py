@@ -46,3 +46,22 @@ def generate_nhh(n = 10, length = 4):
     * list: a list of strings representing the application of no_high_high.
     """
     return [no_high_high(length) for i in range(n)]
+
+def no_high_high_bad(length = 4):
+    sigma = ["n", "i", "y", "u"]
+
+    if length < 1:
+        raise ValueError("The string has a very weird length.")
+
+    word = []
+    for i in range(length-3):
+        selection = choice(sigma)
+        word.append(selection)
+    for i in range(3):
+        selection1 = choice(["i","y","u"])
+        word.append(selection1)
+    string = "".join(word)
+    return(string)
+
+def generate_nhh_bad(n = 10, length = 4):
+    return [no_high_high_bad(length=length) for i in range(n)]

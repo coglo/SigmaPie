@@ -10,15 +10,14 @@ def evaluate_nvc_words(data):
     * Prints the report that shows if the data follows the rule.
     """
     correct = 0
+    irrelevant = 0
     for w in data:
-
-        if 'a' in w:
+        if 'a' not in w:
+            irrelevant += 1
+        elif 'a' in w:
             temp_word = w[w.index('a'):]
             if 't' not in temp_word:
                 correct += 1
-        else:
-            correct += 1
- 
-    ratio = (correct / len(data))
-    return ratio * 100
-    #print(f"Percentage of nvc well-formed words: {int(ratio * 100)}%.")
+    sum = len(data) - irrelevant 
+    ratio = (correct / sum)
+    print(f"Percentage of nvc well-formed words: {int(ratio * 100)}%.")

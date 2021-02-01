@@ -43,3 +43,19 @@ def generate_nvc(n = 10, length = 4):
     return [no_vc(length) for i in range(n)]
 
 print(generate_nvc(n = 10, length = 4))
+
+def no_vc_bad(length = 4):
+    sigma = ["a", "n", "t"]
+
+    if length < 1:
+        raise ValueError("The string has a very weird length.")
+
+    word = []
+    for i in range(length-1):
+        selection = choice(sigma)
+        word.append(selection)
+    string = "".join(word) + "t"
+    return(string)
+
+def generate_nvc_bad(n = 10, length = 4):
+    return [no_vc_bad(length=length) for i in range(n)]

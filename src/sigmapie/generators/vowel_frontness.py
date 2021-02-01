@@ -25,26 +25,8 @@ def vowel_frontness(length = 4):
         
     string = "".join([choice(sigma) for i in range(length)])
     word = ">" + string + "<"
-    if "iə<" in word:
-        word = word.replace("iə<", "ie<")
-        return (word[1:5])
-    if "yə<" in word:
-        word = word.replace("yə<", "ye<")
-        return (word[1:5])
-    if "iən" in word:
-        word = word.replace("iən", "ien")
-        return (word[1:5])
-    if "yən" in word:
-        word = word.replace("yən", "yen")
-        return (word[1:5]) 
-    if "au" in word:
-        word = word.replace("au", "ɑu")
-        return (word[1:5])
-    if "aŋ" in word:
-        word = word.replace("aŋ", "ɑŋ")
-        return (word[1:5])
-    else:
-        return (string)  
+    word = word.replace("iə<", "ie<").replace("yə<", "ye<").replace("iən", "ien").replace("yən", "yen").replace("au", "ɑu").replace("aŋ", "ɑŋ")
+    return word[1:length+1] 
 
 def vowel_frontness_io(length = 4):
     """
@@ -117,3 +99,16 @@ def generate_vfr_io(n = 10, length = 4):
     return [vowel_frontness_io(length) for i in range(n)]
 
 print(generate_vfr(n = 10, length = 4))
+
+
+def vowel_frontness_bad(length = 4):
+    sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"]
+
+    if length < 1:
+        raise ValueError("The string has a very weird length.")
+        
+    string = "".join([choice(sigma) for i in range(length-3)]) + choice(["iə", "yə", "iən", "yən", "au", "aŋ"])
+    return string
+
+def generate_vfr_bad(n = 10, length = 4):
+    return [vowel_frontness_bad(length=length) for i in range(n)]
