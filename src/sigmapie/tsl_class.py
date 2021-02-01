@@ -303,3 +303,7 @@ class TSL(SL):
             return all(matches)
         else:
             return not any(matches)
+    
+    def percent_grammatical(self, wordlist):
+        return sum([self.scan(word) for word in wordlist]) * 100/len(wordlist)
+

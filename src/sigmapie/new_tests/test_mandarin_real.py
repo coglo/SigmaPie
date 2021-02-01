@@ -25,14 +25,15 @@ def get_mandarin_words():
     with open('C:/Users/19061/git/phomo/phomo/mandarin_words.csv', encoding="utf-8-sig", newline='') as f:
         reader = csv.reader(f)
         return [word[0] for word in list(reader)]
-
+'''
 def get_mandarin_nonwords():
     with open('C:/Users/19061/git/phomo/phomo/mandarin_nonwords.csv', encoding="utf-8-sig", newline='') as f:
         reader = csv.reader(f)
         return [word[0] for word in list(reader)]
+'''
 
 data = get_mandarin_words()
-datan = get_mandarin_nonwords()
+#datan = get_mandarin_nonwords()
 
 def evaluate_models(evaluator, data, tsl=True):
     
@@ -43,7 +44,7 @@ def evaluate_models(evaluator, data, tsl=True):
     mtsl_h = MTSL(polar="n")
     '''
     data = get_mandarin_words()
-    datan = get_mandarin_nonwords()
+    #datan = get_mandarin_nonwords()
 
     sp_h = SP()
     sl_h = SL()
@@ -92,13 +93,49 @@ def evaluate_models(evaluator, data, tsl=True):
     print("SP grammar:", sp_h.grammar)
     print("TSL grammar:", tsl_h.grammar)
     print("MTSL grammar:", mtsl_h.grammar)
+
     '''
+    sl_h.switch_polarity()
+    print("Polarity of the SL grammar:", sl_h.check_polarity())
+    print("SL grammar:", sl_h.grammar)
+    sp_h.switch_polarity()
+    print("Polarity of the SP grammar:", sp_h.check_polarity())
+    print("SP grammar:", sp_h.grammar)
+    tsl_h.switch_polarity()
+    print("Polarity of the TSL grammar:", tsl_h.check_polarity())
+    print("TSL grammar:", tsl_h.grammar)
+    mtsl_h.switch_polarity()
+    print("Polarity of the MTSL grammar:", mtsl_h.check_polarity())
+    print("MTSL grammar:", mtsl_h.grammar)
 
     print("SL polarity:", sl_h.check_polarity())
     print("SP polarity:", sp_h.check_polarity())
     if tsl:
         print("TSL polarity:", tsl_h.check_polarity())
     print("MTSL polarity:", mtsl_h.check_polarity())
+
+    
+
+    print("SL-------", evaluator.__name__, "------")
+    print("model generated data", evaluator.__name__,  round(evaluator(sl_h.generate_sample(1000)), 3))
+    print("generator genarated data", evaluator.__name__, round(evaluator(data), 3))
+    print("generator generated data", "graph_model.percent_grammatical", round(sl_h.percent_grammatical(data), 3), "\n")
+
+    print("SP-------", evaluator.__name__, "------")
+    print("model generated data", evaluator.__name__,  round(evaluator(sp_h.generate_sample(1000)), 3))
+    print("generator genarated data", evaluator.__name__, round(evaluator(data), 3))
+    print("generator generated data", "graph_model.percent_grammatical", round(sp_h.percent_grammatical(data), 3), "\n")
+
+    print("TSL-------", evaluator.__name__, "------")
+    print("model generated data", evaluator.__name__,  round(evaluator(tsl_h.generate_sample(1000)), 3))
+    print("generator genarated data", evaluator.__name__, round(evaluator(data), 3))
+    print("generator generated data", "graph_model.percent_grammatical", round(tsl_h.percent_grammatical(data), 3), "\n")
+
+    print("MTSL-------", evaluator.__name__, "------")
+    print("model generated data", evaluator.__name__,  round(evaluator(mtsl_h.generate_sample(1000)), 3))
+    print("generator genarated data", evaluator.__name__, round(evaluator(data), 3))
+    print("generator generated data", "graph_model.percent_grammatical", round(mtsl_h.percent_grammatical(data), 3), "\n")
+
 
 def test_no_lab_lab():
     evaluate_models(evaluate_nll_words, data)

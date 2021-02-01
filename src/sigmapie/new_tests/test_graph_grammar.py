@@ -28,12 +28,15 @@ import csv
 
 def evaluate_graphmodels(evaluator, data):
     graph_model = GraphGrammar(data)
-    evaluator(graph_model.generate_sample(1000))
-    graph_model.write_dot()
-    evaluator(data)
-    print("alphabet:", graph_model.alphabet)
-    print("restricted pairs:", graph_model.restricted_pairs)
-    print("Graphmodel sample:", graph_model.generate_sample(10), "\n")
+
+    print("-------", evaluator.__name__, "------")
+    print("graph_model", "graph model generated data", evaluator.__name__,  round(evaluator(graph_model.generate_sample(1000)), 3))
+    print("graph_model", "generator genarated data", evaluator.__name__, round(evaluator(data), 3))
+    print("graph_model", "generator generated data", "graph_model.percent_grammatical", round(graph_model.percent_grammatical(data), 3), "\n")
+
+    #print("alphabet:", graph_model.alphabet)
+    #print("restricted pairs:", graph_model.restricted_pairs)
+    #print("Graphmodel sample:", graph_model.generate_sample(10), "\n")
 
 
 def test_no_lab_lab_generated():

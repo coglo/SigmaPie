@@ -17,4 +17,5 @@ def evaluate_nhh_words(data):
             correct +=1
  
     ratio = (correct / len(data))
-    print(f"Percentage of nhh well-formed words: {int(ratio * 100)}%.")
+    return ratio * 100
+    #print(f"Percentage of nhh well-formed words: {int(ratio * 100)}%.")

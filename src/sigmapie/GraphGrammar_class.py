@@ -114,16 +114,11 @@ class GraphGrammar():
     def write_dot(self, path="graph.dot"):
         write_dot(self.graph, path)
     
-    def acceptable(self, word):
+    def percent_grammatical(self, wordlist):
+        return sum([self.gramatical(word) for word in wordlist]) * 100/len(wordlist)
+
+    def gramatical(self, word):
         for i in range(len(word)-1):
             if (word[i]+ "." + str(i), word[i+1]+ "." + str(i+1)) not in self.graph.edges:
                 return False
         return True
-
-
-        ''' 
-        def future_word(self, length):
-        #using gradient grammar to predict future words might be better, find the new words in last 50 years and check their entropy.
-        word = self.generate_word(self.max_word_length)
-        if word in 
-        '''

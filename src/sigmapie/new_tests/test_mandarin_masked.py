@@ -105,6 +105,27 @@ def evaluate_models(evaluator, data, tsl=True):
         print("TSL polarity:", tsl_h.check_polarity())
     print("MTSL polarity:", mtsl_h.check_polarity())
 
+    print("SL-------", evaluator.__name__, "------")
+    print("model generated data", evaluator.__name__,  round(evaluator(sl_h.generate_sample(1000)), 3))
+    print("generator genarated data", evaluator.__name__, round(evaluator(data), 3))
+    print("generator generated data", "graph_model.percent_grammatical", round(sl_h.percent_grammatical(data), 3), "\n")
+
+    print("SP-------", evaluator.__name__, "------")
+    print("model generated data", evaluator.__name__,  round(evaluator(sp_h.generate_sample(1000)), 3))
+    print("generator genarated data", evaluator.__name__, round(evaluator(data), 3))
+    print("generator generated data", "graph_model.percent_grammatical", round(sp_h.percent_grammatical(data), 3), "\n")
+
+    print("TSL-------", evaluator.__name__, "------")
+    print("model generated data", evaluator.__name__,  round(evaluator(tsl_h.generate_sample(1000)), 3))
+    print("generator genarated data", evaluator.__name__, round(evaluator(data), 3))
+    print("generator generated data", "graph_model.percent_grammatical", round(tsl_h.percent_grammatical(data), 3), "\n")
+
+    print("MTSL-------", evaluator.__name__, "------")
+    print("model generated data", evaluator.__name__,  round(evaluator(mtsl_h.generate_sample(1000)), 3))
+    print("generator genarated data", evaluator.__name__, round(evaluator(data), 3))
+    print("generator generated data", "graph_model.percent_grammatical", round(mtsl_h.percent_grammatical(data), 3), "\n")
+
+
 def test_no_lab_lab():
     data = get_masked_mandarin_words(keep_list=["n", "u", "y"])
     datan = get_masked_mandarin_nonwords(keep_list=["n", "u", "y"])

@@ -226,15 +226,11 @@ class SL(L):  # all the methods of L are in SL too.
             self.fsm.trim_fsm()
             self.grammar = [j[0] + (j[1],) for j in self.fsm.transitions]
     
-    def data_evaluator(self, words):
-        correct = 0
-        for w in words:
-            w_grammar = self.ngramize_data(w)
-            if w_grammar.issubset(self.grammar):
-                correct += 1
-        
-        ratio = (correct / len(words))
-        return ratio
+    def percent_grammatical(self, wordlist):
+        return sum([self.scan(word) for word in wordlist]) * 100/len(wordlist)
+
+
+ 
 
 
 

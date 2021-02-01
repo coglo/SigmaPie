@@ -16,4 +16,5 @@ def evaluate_ncc_words(data):
             correct += 1
  
     ratio = (correct / len(data))
-    print(f"Percentage of ncc well-formed words: {int(ratio * 100)}%.")
+    return ratio * 100
+    #print(f"Percentage of ncc well-formed words: {int(ratio * 100)}%.")
