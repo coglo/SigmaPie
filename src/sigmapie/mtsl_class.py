@@ -463,4 +463,4 @@ class MTSL(TSL):
             self.grammar[tier] = deepcopy(sl.grammar)
 
     def percent_grammatical(self, wordlist):
-        return sum([self.scan(word) for word in wordlist]) * 100/len(wordlist)
+        return sum([self.scan(word) for word in wordlist])/len(wordlist)

@@ -1,6 +1,6 @@
 from random import choice
 
-def no_lab_lab(length = 4):
+def no_lab_lab(length = 10):
     """
     This function generates either a word grammatical with respect to a rule
     of no_lab_lab.
@@ -27,7 +27,7 @@ def no_lab_lab(length = 4):
     string = "".join(word)
     return(string)
 
-def no_lab_lab_bad(length = 4):
+def no_lab_lab_bad(length = 10):
     sigma = ["n", "y", "u"]
 
     if length < 1:
@@ -43,7 +43,7 @@ def no_lab_lab_bad(length = 4):
     string = "".join(word)
     return(string)
 
-def generate_nll(n = 10, length = 4):
+def generate_nll(n = 10, length = 10):
     """
     Generates a set of strings or pairs that satisfy the rule of
     the no_lab_lab.
@@ -58,6 +58,6 @@ def generate_nll(n = 10, length = 4):
     return [no_lab_lab(length=length) for i in range(n)]
 
 
-def generate_nll_bad(n = 10, length = 4):
+def generate_nll_bad(n = 10, length = 10):
     return [no_lab_lab_bad(length=length) for i in range(n)]
 

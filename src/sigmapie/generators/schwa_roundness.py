@@ -3,7 +3,7 @@ from random import choice
 ə → o / w _ #, or _ u 
 '''
 
-def schwa_roundness(length = 4):
+def schwa_roundness(length = 10):
     """
     This function generates either a word grammatical with respect to a rule
     of schwa_roundness harmony.
@@ -26,7 +26,7 @@ def schwa_roundness(length = 4):
     return word[1:length+1]
 
 
-def schwa_roundness_io(length = 4):
+def schwa_roundness_io(length = 10):
     """
     This generator generates the fake input and output pairs of Mandarin syllable.
     
@@ -48,7 +48,7 @@ def schwa_roundness_io(length = 4):
     word = word.replace("uə<", "uo<").replace("əu", "ou")
     return ((string, word[1:length+1])) 
 
-def generate_sro(n = 10, length = 4):
+def generate_sro(n = 10, length = 10):
     """
     Generates a set of strings that satisfy the rule of
     the schwa_roundness harmony.
@@ -62,7 +62,7 @@ def generate_sro(n = 10, length = 4):
     """
     return [schwa_roundness(length) for i in range(n)]
 
-def generate_sro_io(n = 10, sigma = ["n", "ə", "u"], length = 4):
+def generate_sro_io(n = 10, sigma = ["n", "ə", "u"], length = 10):
     """
     Generates a set of pairs that satisfy the rule of
     the schwa_roundness harmony.
@@ -84,7 +84,7 @@ for word in data:
         print("BAD", word)
 print("DONE")
 '''
-def schwa_roundness_bad(length = 4):
+def schwa_roundness_bad(length = 10):
     sigma = ["n", "ə", "u"]
 
     if length < 1:
@@ -93,5 +93,5 @@ def schwa_roundness_bad(length = 4):
     string = "".join([choice(sigma) for i in range(length-2)]) + choice(["uə", "əu"])
     return string
 
-def generate_sro_bad(n = 10, length = 4):
+def generate_sro_bad(n = 10, length = 10):
     return [schwa_roundness_bad(length=length) for i in range(n)]

@@ -1,6 +1,6 @@
 from random import choice
 
-def no_high_high(length = 4):
+def no_high_high(length = 10):
     """
     This function generates either a word grammatical with respect to a rule
     of no_high_high.
@@ -12,6 +12,7 @@ def no_high_high(length = 4):
     Outputs:
     * str: a string representing the application of the no_high_high constraint. 
     """
+    
     sigma = ["n", "i", "y", "u"]
     if length < 1:
         raise ValueError("The string has a very weird length.")
@@ -33,7 +34,7 @@ def no_high_high(length = 4):
     string = "".join(word)
     return(string)
 
-def generate_nhh(n = 10, length = 4):
+def generate_nhh(n = 10, length = 10):
     """
     Generates a set of strings or pairs that satisfy the rule of
     the no_high_high.
@@ -47,21 +48,20 @@ def generate_nhh(n = 10, length = 4):
     """
     return [no_high_high(length) for i in range(n)]
 
-def no_high_high_bad(length = 4):
+def no_high_high_bad(length = 10):
     sigma = ["n", "i", "y", "u"]
 
     if length < 1:
         raise ValueError("The string has a very weird length.")
 
-    word = []
-    for i in range(length-3):
+    word = ["y"]
+    for i in range(length-2):
         selection = choice(sigma)
         word.append(selection)
-    for i in range(3):
-        selection1 = choice(["i","y","u"])
-        word.append(selection1)
-    string = "".join(word)
+    selection1 = choice(["i","u"])
+    word.append(selection1)
+    string = "".join(word) 
     return(string)
 
-def generate_nhh_bad(n = 10, length = 4):
+def generate_nhh_bad(n = 10, length = 10):
     return [no_high_high_bad(length=length) for i in range(n)]

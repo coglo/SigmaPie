@@ -1,6 +1,6 @@
 from random import choice
 
-def no_cor_cor(length = 4):
+def no_cor_cor(length = 10):
     """
     This function generates either a word grammatical with respect to a rule
     of no_cor_cor.
@@ -27,7 +27,7 @@ def no_cor_cor(length = 4):
     string = "".join(word)
     return(string)
 
-def generate_ncc(n = 10, length = 4):
+def generate_ncc(n = 10, length = 10):
     """
     Generates a set of strings or pairs that satisfy the rule of
     the no_cor_cor.
@@ -41,9 +41,7 @@ def generate_ncc(n = 10, length = 4):
     """
     return [no_cor_cor(length) for i in range(n)]
 
-print(generate_ncc(n = 10, length = 4))
-
-def no_cor_cor_bad(length = 4):
+def no_cor_cor_bad(length = 10):
     sigma = ["n", "y", "i"]
 
     if length < 1:
@@ -60,5 +58,5 @@ def no_cor_cor_bad(length = 4):
     return(string)
 
 
-def generate_ncc_bad(n = 10, length = 4):
+def generate_ncc_bad(n = 10, length = 10):
     return [no_cor_cor_bad(length=length) for i in range(n)]

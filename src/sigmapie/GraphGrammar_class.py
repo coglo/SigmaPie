@@ -113,12 +113,20 @@ class GraphGrammar():
 
     def write_dot(self, path="graph.dot"):
         write_dot(self.graph, path)
-    
+
+    def show_graph_edges(self, data):
+        self.write_dot()
+        self.plot_graph()
+        return self.graph.edges, self.graph.nodes
+
     def percent_grammatical(self, wordlist):
-        return sum([self.gramatical(word) for word in wordlist]) * 100/len(wordlist)
+        return sum([self.gramatical(word) for word in wordlist])/len(wordlist)
 
     def gramatical(self, word):
         for i in range(len(word)-1):
             if (word[i]+ "." + str(i), word[i+1]+ "." + str(i+1)) not in self.graph.edges:
+                return False
+            found_pairs = set(combinations(word,2))
+            if found_pairs.intersection(self.restricted_pairs):
                 return False
         return True

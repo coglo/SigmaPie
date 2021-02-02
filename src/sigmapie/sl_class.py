@@ -227,7 +227,7 @@ class SL(L):  # all the methods of L are in SL too.
             self.grammar = [j[0] + (j[1],) for j in self.fsm.transitions]
     
     def percent_grammatical(self, wordlist):
-        return sum([self.scan(word) for word in wordlist]) * 100/len(wordlist)
+        return sum([self.scan(word) for word in wordlist])/len(wordlist)
 
 
  

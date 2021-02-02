@@ -6,7 +6,7 @@ a → ɑ / _ u, ŋ
 
 '''
 
-def vowel_frontness(length = 4):
+def vowel_frontness(length = 10):
     """
     This function generates either a word grammatical with respect to a rule
     of vowel_frontness harmony.
@@ -28,7 +28,7 @@ def vowel_frontness(length = 4):
     word = word.replace("iə<", "ie<").replace("yə<", "ye<").replace("iən", "ien").replace("yən", "yen").replace("au", "ɑu").replace("aŋ", "ɑŋ")
     return word[1:length+1] 
 
-def vowel_frontness_io(length = 4):
+def vowel_frontness_io(length = 10):
     """
     This generator generates the fake input and output pairs of Mandarin syllable.
     
@@ -70,7 +70,7 @@ def vowel_frontness_io(length = 4):
     word = word.replace("iə<", "ie<").replace("yə<", "ye<").replace("iən", "ien").replace("yən", "yen").replace("au", "ɑu").replace("aŋ", "ɑŋ")
     return ((string, word[1:length+1])) 
 
-def generate_vfr(n = 10, length = 4):
+def generate_vfr(n = 10, length = 10):
     """
     Generates a set of strings that satisfy the rule of
     the vowel_frontness harmony.
@@ -84,7 +84,7 @@ def generate_vfr(n = 10, length = 4):
     """
     return [vowel_frontness(length) for i in range(n)]
 
-def generate_vfr_io(n = 10, length = 4):
+def generate_vfr_io(n = 10, length = 10):
     """
     Generates a set of pairs that satisfy the rule of
     the vowel_frontness harmony.
@@ -98,17 +98,15 @@ def generate_vfr_io(n = 10, length = 4):
     """
     return [vowel_frontness_io(length) for i in range(n)]
 
-print(generate_vfr(n = 10, length = 4))
 
-
-def vowel_frontness_bad(length = 4):
+def vowel_frontness_bad(length = 10):
     sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"]
 
     if length < 1:
         raise ValueError("The string has a very weird length.")
         
-    string = "".join([choice(sigma) for i in range(length-3)]) + choice(["iə", "yə", "iən", "yən", "au", "aŋ"])
+    string = "".join([choice(sigma) for i in range(length-2)]) + choice(["iə", "yə", "iən", "yən", "au", "aŋ"])
     return string
 
-def generate_vfr_bad(n = 10, length = 4):
+def generate_vfr_bad(n = 10, length = 10):
     return [vowel_frontness_bad(length=length) for i in range(n)]
