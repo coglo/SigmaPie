@@ -74,7 +74,7 @@ def evaluate_models(evaluator, data, datan, tsl=True):
     tsl_h.learn()
     mtsl_h.learn()
 
-    evaluator(data)
+    #evaluator(data)
     evaluator(sl_h.generate_sample(n=1000, repeat=True))
     evaluator(sp_h.generate_sample(n=1000, repeat=True))
     if tsl:
@@ -131,8 +131,8 @@ def evaluate_models(evaluator, data, datan, tsl=True):
     print(sp_h.percent_grammatical(data))
     print(tsl_h.percent_grammatical(data))
     print(mtsl_h.percent_grammatical(data))
-    print(datan[0:20], "\n")
-    evaluator(datan)
+    #print(datan[0:20], "\n")
+    #evaluator(datan)
     print(sl_h.percent_grammatical(datan))
     print(sp_h.percent_grammatical(datan))
     print(tsl_h.percent_grammatical(datan))

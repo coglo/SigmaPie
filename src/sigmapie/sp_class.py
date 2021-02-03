@@ -128,7 +128,7 @@ class SP(L):
         subseq = self.subsequences(string)
         found_in_G = [(s in self.grammar) for s in subseq]
 
-        if self.check_polarity == "p":
+        if self.check_polarity() == "p":
             return all(found_in_G)
         else:
             return not any(found_in_G)
@@ -216,4 +216,4 @@ class SP(L):
         self.grammar = list(set(self.grammar))
 
     def percent_grammatical(self, wordlist):
-        return sum([self.scan(word) for word in wordlist]) /len(wordlist)
+        return sum([self.scan(word) for word in wordlist])/len(wordlist)

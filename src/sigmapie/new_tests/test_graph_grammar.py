@@ -39,15 +39,16 @@ def evaluate_graphmodels(evaluator, data, datan):
     '''
 
     evaluator(data)
+    evaluator(datan)
+
     evaluator(graph_model.generate_sample(1000))
     print(graph_model.percent_grammatical(data))
-    print(datan[0:20], "\n")
-    evaluator(datan)
+    #print(datan[0:20], "\n")
     print(graph_model.percent_grammatical(datan))
 
     #print("alphabet:", graph_model.alphabet)
     #print("restricted pairs:", graph_model.restricted_pairs)
-    print("Graphmodel sample:", graph_model.generate_sample(10), "\n")
+    #print("Graphmodel sample:", graph_model.generate_sample(10), "\n")
     #print("edges and nodes:", graph_model.show_graph_edges(data), "\n")
 
 

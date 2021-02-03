@@ -18,15 +18,14 @@ def no_vc(length = 10):
 
     word = []
     for i in range(length):
-        selection = choice(["a", "n"])
-
-        #if selection is "a":
-            #try:
-                #sigma.remove('t')
-            #except ValueError:
-                #pass
+        selection = choice(sigma)
+        if selection is "a":
+            try:
+                sigma.remove('t')
+            except ValueError:
+                pass
         word.append(selection)
-    string = "t" + "".join(word)
+    string = "".join(word)
     return(string)
 
 def generate_nvc(n = 10, length = 10):
