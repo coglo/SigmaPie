@@ -14,8 +14,7 @@ def show_graph(data):
     return graph_model
 
 
-# ipython   %pylab   from sigmapie.generators.no_lab_lab import generate_nll, no_lab_lab
-#from sigmapie.GraphGrammar_class import GraphGrammar #from sigmapie.GraphGrammarExample import show_graph
+# ipython   %pylab   g.plot_graph()
 show_graph(generate_nll(n=500))
 g = show_graph(generate_nll(n=500))
 print(g.graph.edges, g.graph.nodes)

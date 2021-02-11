@@ -100,13 +100,16 @@ def generate_vfr_io(n = 10, length = 10):
 
 
 def vowel_frontness_bad(length = 10):
-    sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"]
+    sigma = ["i", "y", "n", "u", "ŋ"]
 
     if length < 1:
         raise ValueError("The string has a very weird length.")
         
-    string = "".join([choice(sigma) for i in range(length-2)]) + choice(["iə", "yə", "iən", "yən", "au", "aŋ"])
-    return string
+    string = "".join([choice(sigma) for i in range(length)])
+    word = ">" + string + "<"
+    word = word.replace("i<", "iə<").replace("y<", "yə<").replace("n", choice(["yən","iən"])).replace("u", "au").replace("ŋ", "aŋ")
+    return word[1:(length+1)] 
+
 
 def generate_vfr_bad(n = 10, length = 10):
     return [vowel_frontness_bad(length=length) for i in range(n)]

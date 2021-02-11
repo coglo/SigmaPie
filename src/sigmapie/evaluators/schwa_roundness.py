@@ -10,17 +10,17 @@ def evaluate_sro_words(data):
     * Prints the report that shows if the data follows the rule.
     """
     correct = 0
-    irrelevant = 0
+    word_ls = []
     for w in data:
-        if "ə" not in w and "u" not in w:
-            irrelevant += 1
         word = ">" + w + "<"
-        if "ə" in w or "u" in w:
-            if "uə<" not in word and "əu" not in word: 
-                correct += 1
+        if "əu" in word or "uo<" in word or "ou" in word or "uə<" in word:
+            word_ls.append(word)
+    for wd in set(word_ls):
+        if "uə<" not in wd and "əu" not in wd: 
+            correct += 1
 
-    sum = len(data) - irrelevant
-    ratio = (correct / sum)
+    #sum = len(data) - irrelevant
+    ratio = (correct / len(set(word_ls)))
     print(f"Percentage of sro well-formed words: {int(ratio * 100)}%.")
 
 

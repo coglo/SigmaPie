@@ -14,9 +14,9 @@ class GraphGrammar():
     it might be interesting to reverse the polarity of the graph
     """
     def __init__(self, data, max_word_length=6):
-        self.graph = self.word_list_graph(data)
         self.alphabet = self._get_alphabet(data)
         self.restricted_pairs = self._get_restricted_pairs(data)
+        self.graph = self.word_list_graph(data)
         self.max_word_length = max_word_length
 
     def _get_alphabet(self, data):
@@ -31,7 +31,16 @@ class GraphGrammar():
         for i, character in enumerate(word):
             graph.add_node(character + "." + str(i))
         for i in range(len(word)-1):
-            graph.add_edge(word[i] + "." + str(i), word[i+1] + "." + str(i+1))
+            if i == 0:
+                graph.add_edge(word[i] + "." + str(i), word[i+1] + "." + str(i+1), blockers={})
+            else:
+                try:
+                    edge_values = graph.edges[(word[i] + "." + str(i), word[i+1] + "." + str(i+1))]
+                    blockers = edge_values['blockers']
+                    new_blockers = blockers - set(word[:i])
+                    graph.add_edge(word[i] + "." + str(i), word[i+1] + "." + str(i+1), blockers=new_blockers)
+                except KeyError:
+                    graph.add_edge(word[i] + "." + str(i), word[i+1] + "." + str(i+1), blockers=self.alphabet - set(word[:i]))  # Maybe off by one error.
         return graph
 
     def word_list_graph(self, word_list):
@@ -42,6 +51,10 @@ class GraphGrammar():
 
     def plot_graph(self):
         plt.subplot(121)
+        pos = nx.spring_layout(self.graph)
+        nx.draw_networkx_edge_labels(self.graph, pos,
+                                     edge_labels={edge: ' '.join(self.graph.edges[edge]['blockers']) for edge in self.graph.edges},
+                                     font_color='red')
         nx.draw(self.graph, with_labels=True, font_weight='bold')
 
 
@@ -80,7 +93,7 @@ class GraphGrammar():
         root_nodes = [node for node in self.graph.nodes() if node[-1] == '0']
         nodes = [choice(root_nodes)]
         for i in range(1, length):
-            # Add a comment here about neighbors and directed edges.
+            # find all the possible following nodes after the last one in nodes  
             neighbors = list(self.graph.neighbors(nodes[-1])) 
             if not neighbors:
                 return "".join([node.split('.')[0] for node in nodes])

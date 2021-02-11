@@ -5,7 +5,8 @@ from sigmapie.evaluators.no_cor_cor import evaluate_ncc_words
 from sigmapie.generators.no_high_high import generate_nhh, no_high_high, generate_nhh_bad, no_high_high_bad
 from sigmapie.evaluators.no_high_high import evaluate_nhh_words
 from sigmapie.generators.no_vc import generate_nvc, no_vc, generate_nvc_bad, no_vc_bad
-from sigmapie.evaluators.no_vc import evaluate_nvc_words  
+from sigmapie.evaluators.no_vc import evaluate_nvc_words, evaluate_nvc_real_words, evaluate_nvc_masked_words 
+
 from sigmapie.generators.schwa_roundness import generate_sro, generate_sro_io, schwa_roundness, schwa_roundness_io, generate_sro_bad, schwa_roundness_bad
 from sigmapie.evaluators.schwa_roundness import evaluate_sro_words, evaluate_sro_io
 from sigmapie.generators.vowel_frontness import generate_vfr, generate_vfr_io, vowel_frontness, vowel_frontness_io, generate_vfr_bad, vowel_frontness_bad
@@ -141,12 +142,12 @@ def evaluate_models(evaluator, data, datan, tsl=True):
 
 def test_no_lab_lab_masked():
     mask_data = get_masked_mandarin_words(keep_list=["n", "u", "y"])
-    bad_data = [w + "uy" for w in mask_data]
+    bad_data = [w + choice(["u", "y"]) + choice(["u", "y"]) for w in mask_data]
     evaluate_models(evaluate_nll_words, mask_data, bad_data)
 
 def test_no_cor_cor_masked():
     mask_data = get_masked_mandarin_words(keep_list=["n", "i", "y"])
-    bad_data = [w + "iy" for w in mask_data]
+    bad_data = [w + choice(["i", "y"]) + choice(["i", "y"]) for w in mask_data]
     evaluate_models(evaluate_ncc_words, mask_data, bad_data)
 
 def test_no_high_high_masked():
@@ -155,9 +156,9 @@ def test_no_high_high_masked():
     evaluate_models(evaluate_nhh_words, mask_data, bad_data)
 
 def test_no_vc_masked():
-    mask_data = get_masked_mandarin_words(keep_list=["n", "t", "a"])
-    bad_data = [w + "t" for w in mask_data]
-    evaluate_models(evaluate_nvc_words, mask_data, bad_data)
+    mask_data = get_masked_mandarin_words(keep_list=["a", "e", "ɑ", "ə", "u", "y", "i", "o", "p", "b", "m", "f", "t", "d", "l", "ts", "tsʰ", "s", "tʂ", "tʂʰ", "ʂ", "ʐ", "tɕ", "tɕʰ", "ɕ", "k", "g", "h"])
+    bad_data = [w + choice(["p", "b", "m", "f", "t", "d", "l", "ts", "tsʰ", "s", "tʂ", "tʂʰ", "ʂ", "ʐ", "tɕ", "tɕʰ", "ɕ", "k", "g", "h"]) for w in mask_data]
+    evaluate_models(evaluate_nvc_masked_words, mask_data, bad_data)
 
 def test_schwa_roundness_masked():
     mask_data = get_masked_mandarin_words(keep_list=["n", "ə", "u", "o"])

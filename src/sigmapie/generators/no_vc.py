@@ -12,7 +12,7 @@ def no_vc(length = 10):
     Outputs:
     * str: a string representing the application of the no_vc constraint. 
     """
-    sigma = ["a", "n", "t"]
+    sigma = ["a", "t"]
     if length < 1:
         raise ValueError("The string has a very weird length.")
 
@@ -43,14 +43,14 @@ def generate_nvc(n = 10, length = 10):
     return [no_vc(length) for i in range(n)]
 
 def no_vc_bad(length = 10):
-    sigma = ["a", "n", "t"]
+    sigma = ["a", "t"]
 
     if length < 1:
         raise ValueError("The string has a very weird length.")
 
     word = []
     for i in range(length-1):
-        selection = choice(["a", "n"])
+        selection = choice(sigma)
         word.append(selection)
     string = "".join(word) + "t"
     return(string)

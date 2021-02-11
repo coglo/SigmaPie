@@ -85,13 +85,15 @@ for word in data:
 print("DONE")
 '''
 def schwa_roundness_bad(length = 10):
-    sigma = ["n", "ə", "u"]
+    sigma = ["n", "u"]
 
     if length < 1:
         raise ValueError("The string has a very weird length.")
         
-    string = "".join([choice(sigma) for i in range(length-2)]) + choice(["uə", "əu"])
-    return string
+    string = "".join([choice(sigma) for i in range(length)])
+    word = ">" + string + "<"
+    word = word.replace("u<", "uə<").replace("u", "əu")
+    return word[1:length+1]
 
 def generate_sro_bad(n = 10, length = 10):
     return [schwa_roundness_bad(length=length) for i in range(n)]

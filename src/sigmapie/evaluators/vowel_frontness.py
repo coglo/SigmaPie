@@ -22,22 +22,24 @@ def evaluate_vfr_words(data):
     # Mark start and end of words.
     #print(f"Percentage of vfr well-formed words: {int(ratio * 100)}%.")
 
-    sigma = ["a", "ə", "i", "y", "n", "u", "ŋ"]
+    sigma = {"a", "ə", "i", "y", "n", "u", "ŋ"}
+    relevant_ls = {"iə<", "yə<", "iən", "yən", "au", "aŋ", "ie<", "ye<", "ien", "yen", "ɑu", "ɑŋ"}
     correct = 0
-    irrelevant = 0
+    word_ls = []
     for w in data:
         word = ">" + w + "<"
-        if "a" not in w and "ə" not in w and "i" not in w and "y" not in w and "u" not in w:
-            irrelevant += 1
+        for r in relevant_ls:
+            if r in word:
+                word_ls.append(word)
+                break
     
     # Find the ratio of words with no restrictions to total words.
-    
-        elif "a" in w or "ə" in w or "i" in w or "y" in w or "u" in w:
-            correct += well_formed(word, restrictions)
+    for wrd in word_ls:
+        correct += well_formed(wrd, restrictions)
 
-    sum = len(data) - irrelevant
-    ratio = (correct / sum)
-    print(f"Percentage of vfr_io well-formed words: {int(ratio * 100)}%.")
+    ratio = (correct / len(word_ls))
+    print(f"Percentage of vfr well-formed words: {int(ratio * 100)}%.")
+
 
 def evaluate_vfr_io(data):
     """

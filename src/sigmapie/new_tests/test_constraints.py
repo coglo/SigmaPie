@@ -7,7 +7,7 @@ from sigmapie.evaluators.no_cor_cor import evaluate_ncc_words
 from sigmapie.generators.no_high_high import generate_nhh, no_high_high, generate_nhh_bad, no_high_high_bad
 from sigmapie.evaluators.no_high_high import evaluate_nhh_words
 from sigmapie.generators.no_vc import generate_nvc, no_vc, generate_nvc_bad, no_vc_bad
-from sigmapie.evaluators.no_vc import evaluate_nvc_words  
+from sigmapie.evaluators.no_vc import evaluate_nvc_words, evaluate_nvc_real_words, evaluate_nvc_masked_words 
 from sigmapie.generators.schwa_roundness import generate_sro, generate_sro_io, schwa_roundness, schwa_roundness_io, generate_sro_bad, schwa_roundness_bad
 from sigmapie.evaluators.schwa_roundness import evaluate_sro_words, evaluate_sro_io
 from sigmapie.generators.vowel_frontness import generate_vfr, generate_vfr_io, vowel_frontness, vowel_frontness_io, generate_vfr_bad, vowel_frontness_bad
