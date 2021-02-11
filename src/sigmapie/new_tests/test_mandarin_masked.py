@@ -139,62 +139,39 @@ def evaluate_models(evaluator, data, datan, tsl=True):
     print(tsl_h.percent_grammatical(datan))
     print(mtsl_h.percent_grammatical(datan))
 
+cons_ls= ["p", "b", "m", "f", "t", "d", "l", "ts", "tsʰ", "s", "tʂ", "tʂʰ", "ʂ", "ʐ", "tɕ", "tɕʰ", "ɕ", "k", "g", "h"]
 
 def test_no_lab_lab_masked():
     mask_data = get_masked_mandarin_words(keep_list=["n", "u", "y"])
-    bad_data = [w + choice(["u", "y"]) + choice(["u", "y"]) for w in mask_data]
+    bad_data = [w.replace(choice(list(w)), choice(["u", "y"])) + choice(["u", "y"])  for w in mask_data]
     evaluate_models(evaluate_nll_words, mask_data, bad_data)
 
 def test_no_cor_cor_masked():
     mask_data = get_masked_mandarin_words(keep_list=["n", "i", "y"])
-    bad_data = [w + choice(["i", "y"]) + choice(["i", "y"]) for w in mask_data]
+    bad_data = [w.replace(choice(list(w)), choice(["i", "y"])) + choice(["i", "y"])  for w in mask_data]
     evaluate_models(evaluate_ncc_words, mask_data, bad_data)
 
 def test_no_high_high_masked():
     mask_data = get_masked_mandarin_words(keep_list=["i", "n", "u", "y"])
-    bad_data = [w + "y" + choice(["i", "u"]) for w in mask_data]
+    bad_data = [w.replace(choice(list(w)), "y") + choice(["i", "u"])  for w in mask_data]
     evaluate_models(evaluate_nhh_words, mask_data, bad_data)
 
 def test_no_vc_masked():
     mask_data = get_masked_mandarin_words(keep_list=["a", "e", "ɑ", "ə", "u", "y", "i", "o", "p", "b", "m", "f", "t", "d", "l", "ts", "tsʰ", "s", "tʂ", "tʂʰ", "ʂ", "ʐ", "tɕ", "tɕʰ", "ɕ", "k", "g", "h"])
-    bad_data = [w + choice(["p", "b", "m", "f", "t", "d", "l", "ts", "tsʰ", "s", "tʂ", "tʂʰ", "ʂ", "ʐ", "tɕ", "tɕʰ", "ɕ", "k", "g", "h"]) for w in mask_data]
+    bad_data = [w.replace(choice(list(w)), choice(["a", "e", "ɑ", "ə", "u", "y", "i", "o"])+choice(list(w))+choice(cons_ls))  for w in mask_data]
     evaluate_models(evaluate_nvc_masked_words, mask_data, bad_data)
 
 def test_schwa_roundness_masked():
     mask_data = get_masked_mandarin_words(keep_list=["n", "ə", "u", "o"])
-    bad_data = [w + choice(["uə", "əu"]) for w in mask_data]
+    bad_data_1 = [w.replace(choice(list(w)), "əu") for w in mask_data[0:int(len(mask_data)/2)]]
+    bad_data_2 = [w.replace(w[-1], "uə") for w in mask_data[int(len(mask_data)/2):]]
+    bad_data = bad_data_1 + bad_data_2
     evaluate_models(evaluate_sro_words, mask_data, bad_data)
 
 def test_vowel_frontness_masked():
     mask_data = get_masked_mandarin_words(keep_list=["a", "ə", "e", "ɑ", "i", "y", "n", "u", "ŋ"])
-    bad_data = [w + choice(["iə", "yə", "iən", "yən", "au", "aŋ"]) for w in mask_data]
+    bad_data_1 = [w.replace(choice(list(w)), choice(["iən", "yən", "au", "aŋ"])) for w in mask_data[0:int(len(mask_data)/2)]]
+    bad_data_2 = [w.replace(w[-1], choice(["iə", "yə"])) for w in mask_data[int(len(mask_data)/2):]]
+    bad_data = bad_data_1 + bad_data_2
     evaluate_models(evaluate_vfr_words, mask_data, bad_data)
-    
-'''
-def test_no_lab_lab():
-    data = get_masked_mandarin_words(keep_list=["n", "u", "y"])
-    datan = get_masked_mandarin_nonwords(keep_list=["n", "u", "y"])
-    evaluate_models(evaluate_nll_words, data)
-    #evaluate_nll_words(datan)
-
-def test_no_cor_cor():
-    data = get_masked_mandarin_words(keep_list=["n", "i", "y"])
-    evaluate_models(evaluate_ncc_words, data)
-
-def test_no_high_high():
-    data = get_masked_mandarin_words(keep_list=["i", "n", "u", "y"])
-    evaluate_models(evaluate_nhh_words, data)
-
-def test_no_vc():
-    data = get_masked_mandarin_words(keep_list=["n", "t", "a"])
-    evaluate_models(evaluate_nvc_words, data)
-
-def test_schwa_roundness():
-    data = get_masked_mandarin_words(keep_list=["n", "ə", "u", "o"])
-    evaluate_models(evaluate_sro_words, data, tsl=False)
-
-def test_vowel_frontness():
-    data = get_masked_mandarin_words(keep_list=["a", "ə", "e", "ɑ", "i", "y", "n", "u", "ŋ"])
-    evaluate_models(evaluate_vfr_words, data)
-'''
-    
+ 

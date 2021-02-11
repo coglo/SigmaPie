@@ -38,20 +38,21 @@ def evaluate_graphmodels(evaluator, data, datan):
     print("generator generated data_bad", "graph_model.percent_grammatical", round(graph_model.percent_grammatical(datan), 3), "\n")
     '''
 
-    evaluator(data)
-    evaluator(datan)
+    #evaluator(data)
+    #evaluator(datan)
 
     evaluator(graph_model.generate_sample(1000))
-    print(graph_model.percent_grammatical(data))
+    print("sample:",graph_model.generate_sample(100))
+    #print(graph_model.percent_grammatical(data))
     #print(datan[0:20], "\n")
-    print(graph_model.percent_grammatical(datan))
+    #print(graph_model.percent_grammatical(datan))
 
     #print("alphabet:", graph_model.alphabet)
     #print("restricted pairs:", graph_model.restricted_pairs)
     #print("Graphmodel sample:", graph_model.generate_sample(10), "\n")
     #print("edges and nodes:", graph_model.show_graph_edges(data), "\n")
 
-
+'''
 def test_no_lab_lab_generated():
     evaluate_graphmodels(evaluate_nll_words, generate_nll(n=1000), generate_nll_bad(n=1000))
 
@@ -85,45 +86,39 @@ cons_ls= ["p", "b", "m", "f", "t", "d", "l", "ts", "tsʰ", "s", "tʂ", "tʂʰ", 
 
 def test_no_lab_lab():
     real_data = get_mandarin_words()
-    bad_data = [w.replace(choice(list(w)), choice(["u", "y"])).replace(choice(list(w)), choice(["u", "y"])) + choice(["u", "y"])  for w in real_data]
+    bad_data = [w.replace(choice(list(w)), choice(["u", "y"])) + choice(["u", "y"])  for w in real_data]
     evaluate_graphmodels(evaluate_nll_words, real_data, bad_data)
 
 def test_no_cor_cor():
     real_data = get_mandarin_words()
-    bad_data = [w.replace(choice(list(w)), choice(["i", "y"])).replace(choice(list(w)), choice(["i", "y"])) + choice(["i", "y"])  for w in real_data]
+    bad_data = [w.replace(choice(list(w)), choice(["i", "y"])) + choice(["i", "y"])  for w in real_data]
     evaluate_graphmodels(evaluate_ncc_words, real_data, bad_data)
 
 def test_no_high_high():
     real_data = get_mandarin_words()
-    bad_data = [w.replace(choice(list(w)), "y").replace(choice(list(w)), choice(["i", "u"])) + choice(["i", "u"])  for w in real_data]
+    bad_data = [w.replace(choice(list(w)), "y") + choice(["i", "u"])  for w in real_data]
     evaluate_graphmodels(evaluate_nhh_words, real_data, bad_data)
 
 def test_no_vc():
     real_data = get_mandarin_words()
-    bad_data = []
-    for w in real_data:
-        for i in w:
-            if i in ["a", "e", "ɑ", "ə", "u", "y", "i", "o"]:
-                w.replace(choice(list(w[w.index(i):]), choice(cons_ls))
-                bad_data.append(w)
-                break
+    bad_data = [w.replace(choice(list(w)), choice(["a", "e", "ɑ", "ə", "u", "y", "i", "o"])+choice(list(w))+choice(cons_ls))  for w in real_data]
     evaluate_graphmodels(evaluate_nvc_real_words, real_data, bad_data)
 
 def test_schwa_roundness():
     real_data = get_mandarin_words()
-    bad_data_1 = [w.replace(choice(list(w)), "əu") for w in real_data[0,len(real_data)/2]]
-    bad_data_2 = [w.replace(w[-1]), "uə") for w in real_data[len(real_data)/2:]]
+    bad_data_1 = [w.replace(choice(list(w)), "əu") for w in real_data[0:int(len(real_data)/2)]]
+    bad_data_2 = [w.replace(w[-1], "uə") for w in real_data[int(len(real_data)/2):]]
     bad_data = bad_data_1 + bad_data_2
     evaluate_graphmodels(evaluate_sro_words, real_data, bad_data)
 
 def test_vowel_frontness():
     real_data = get_mandarin_words()
-    bad_data_1 = [w.replace(choice(list(w)), choice(["iən", "yən", "au", "aŋ"])) for w in real_data[0,len(real_data)/2]]
-    bad_data_2 = [w.replace(w[-1]), choice(["iə", "yə"])) for w in real_data[len(real_data)/2:]]
+    bad_data_1 = [w.replace(choice(list(w)), choice(["iən", "yən", "au", "aŋ"])) for w in real_data[0:int(len(real_data)/2)]]
+    bad_data_2 = [w.replace(w[-1], choice(["iə", "yə"])) for w in real_data[int(len(real_data)/2):]]
     bad_data = bad_data_1 + bad_data_2
     evaluate_graphmodels(evaluate_vfr_words, real_data, bad_data)
 
-
+'''
 def get_masked_mandarin_words(keep_list=["a", "e", "n", "ɑ","ŋ","n", "ə", "u", "y", "i", "t"]):
     with open('C:/Users/19061/git/phomo/phomo/mandarin_words.csv', encoding="utf-8-sig", newline='') as f:
         reader = csv.reader(f)
@@ -150,30 +145,36 @@ def get_masked_mandarin_nonwords(keep_list=["a", "e", "n", "ɑ", "ŋ", "n", "ə"
 
 def test_no_lab_lab_masked():
     mask_data = get_masked_mandarin_words(keep_list=["u", "y"])
-    bad_data = [w + "uy" for w in mask_data]
+    bad_data = [w.replace(choice(list(w)), choice(["u", "y"])) + choice(["u", "y"])  for w in mask_data]
     evaluate_graphmodels(evaluate_nll_words, mask_data, bad_data)
 
 def test_no_cor_cor_masked():
     mask_data = get_masked_mandarin_words(keep_list=["i", "y"])
-    bad_data = [w + "iy" for w in mask_data]
+    bad_data = [w.replace(choice(list(w)), choice(["i", "y"])) + choice(["i", "y"])  for w in mask_data]
     evaluate_graphmodels(evaluate_ncc_words, mask_data, bad_data)
 
 def test_no_high_high_masked():
     mask_data = get_masked_mandarin_words(keep_list=["i", "u", "y"])
-    bad_data = [w + "y" + choice(["i", "u"]) for w in mask_data]
+    bad_data = [w.replace(choice(list(w)), "y") + choice(["i", "u"])  for w in mask_data]
     evaluate_graphmodels(evaluate_nhh_words, mask_data, bad_data)
 
+'''
 def test_no_vc_masked():
     mask_data = get_masked_mandarin_words(keep_list=["a", "e", "ɑ", "ə", "u", "y", "i", "o", "p", "b", "m", "f", "t", "d", "l", "ts", "tsʰ", "s", "tʂ", "tʂʰ", "ʂ", "ʐ", "tɕ", "tɕʰ", "ɕ", "k", "g", "h"])
-    bad_data = [w + choice(["p", "b", "m", "f", "t", "d", "l", "ts", "tsʰ", "s", "tʂ", "tʂʰ", "ʂ", "ʐ", "tɕ", "tɕʰ", "ɕ", "k", "g", "h"]) for w in mask_data]
+    bad_data = [w.replace(choice(list(w)), choice(["a", "e", "ɑ", "ə", "u", "y", "i", "o"])+choice(list(w))+choice(cons_ls))  for w in mask_data]
     evaluate_graphmodels(evaluate_nvc_masked_words, mask_data, bad_data)
 
 def test_schwa_roundness_masked():
     mask_data = get_masked_mandarin_words(keep_list=["ə", "u", "o"])
-    bad_data = [w + choice(["uə", "əu"]) for w in mask_data]
+    bad_data_1 = [w.replace(choice(list(w)), "əu") for w in mask_data[0:int(len(mask_data)/2)]]
+    bad_data_2 = [w.replace(w[-1], "uə") for w in mask_data[int(len(mask_data)/2):]]
+    bad_data = bad_data_1 + bad_data_2
     evaluate_graphmodels(evaluate_sro_words, mask_data, bad_data)
 
 def test_vowel_frontness_masked():
     mask_data = get_masked_mandarin_words(keep_list=["a", "ə", "e", "ɑ", "i", "y", "n", "u", "ŋ"])
-    bad_data = [w + choice(["iə", "yə", "iən", "yən", "au", "aŋ"]) for w in mask_data]
+    bad_data_1 = [w.replace(choice(list(w)), choice(["iən", "yən", "au", "aŋ"])) for w in mask_data[0:int(len(mask_data)/2)]]
+    bad_data_2 = [w.replace(w[-1], choice(["iə", "yə"])) for w in mask_data[int(len(mask_data)/2):]]
+    bad_data = bad_data_1 + bad_data_2
     evaluate_graphmodels(evaluate_vfr_words, mask_data, bad_data)
+'''

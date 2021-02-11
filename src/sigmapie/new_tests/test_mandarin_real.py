@@ -143,53 +143,40 @@ def evaluate_models(evaluator, data, datan, tsl=True):
     print("generator generated data", "graph_model.percent_grammatical", round(mtsl_h.percent_grammatical(data), 3), "\n")
     '''
 
+cons_ls= ["p", "b", "m", "f", "t", "d", "l", "ts", "tsʰ", "s", "tʂ", "tʂʰ", "ʂ", "ʐ", "tɕ", "tɕʰ", "ɕ", "k", "g", "h"]
+
 def test_no_lab_lab():
     real_data = get_mandarin_words()
-    bad_data = [w + choice(["u", "y"]) + choice(["u", "y"]) for w in real_data]
+    bad_data = [w.replace(choice(list(w)), choice(["u", "y"])) + choice(["u", "y"]) for w in real_data]
     evaluate_models(evaluate_nll_words, real_data, bad_data)
 
 def test_no_cor_cor():
     real_data = get_mandarin_words()
-    bad_data = [w + choice(["i", "y"]) + choice(["i", "y"]) for w in real_data]
+    bad_data = [w.replace(choice(list(w)), choice(["i", "y"])) + choice(["i", "y"]) for w in real_data]
     evaluate_models(evaluate_ncc_words, real_data, bad_data)
 
 def test_no_high_high():
     real_data = get_mandarin_words()
-    bad_data = [w + "y" + choice(["i", "u"]) for w in real_data]
+    bad_data = [w.replace(choice(list(w)), "y") + choice(["i", "u"])  for w in real_data]
     evaluate_models(evaluate_nhh_words, real_data, bad_data)
 
 def test_no_vc():
     real_data = get_mandarin_words()
-    bad_data = [w + "t" for w in real_data]
+    bad_data = [w.replace(choice(list(w)), choice(["a", "e", "ɑ", "ə", "u", "y", "i", "o"])+choice(list(w))+choice(cons_ls))  for w in real_data]
     evaluate_models(evaluate_nvc_real_words, real_data, bad_data)
 
 def test_schwa_roundness():
     real_data = get_mandarin_words()
-    bad_data = [w + choice(["uə", "əu"]) for w in real_data]
+    bad_data_1 = [w.replace(choice(list(w)), "əu") for w in real_data[0:int(len(real_data)/2)]]
+    bad_data_2 = [w.replace(w[-1], "uə") for w in real_data[int(len(real_data)/2):]]
+    bad_data = bad_data_1 + bad_data_2
     evaluate_models(evaluate_sro_words, real_data, bad_data)
 
 def test_vowel_frontness():
     real_data = get_mandarin_words()
-    bad_data = [w + choice(["iə", "yə", "iən", "yən", "au", "aŋ"]) for w in real_data]
+    bad_data_1 = [w.replace(choice(list(w)), choice(["iən", "yən", "au", "aŋ"])) for w in real_data[0:int(len(real_data)/2)]]
+    bad_data_2 = [w.replace(w[-1], choice(["iə", "yə"])) for w in real_data[int(len(real_data)/2):]]
+    bad_data = bad_data_1 + bad_data_2
     evaluate_models(evaluate_vfr_words, real_data, bad_data)
-
-'''
-def test_no_lab_lab():
-    evaluate_models(evaluate_nll_words, data)
-    #evaluate_nll_words(datan)  
-
-def test_no_cor_cor():
-    evaluate_models(evaluate_ncc_words, data)
-
-def test_no_high_high():
-    evaluate_models(evaluate_nhh_words, data)
-
-def test_no_vc():
-    evaluate_models(evaluate_nvc_words, data)
-
-def test_schwa_roundness():
-    evaluate_models(evaluate_sro_words, data, tsl=False)
-
-def test_vowel_frontness():
-    evaluate_models(evaluate_vfr_words, data)
-'''
+ 
+ 

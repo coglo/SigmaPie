@@ -17,7 +17,7 @@ def evaluate_nvc_words(data):
         if 'a' in w and "t" in w:
             word_ls.append(w)
     for wd in set(word_ls):
-        temp_word = w[w.index('a'):]
+        temp_word = wd[wd.index('a'):]
         if 't' not in temp_word:
             correct += 1
     ratio = (correct / len(set(word_ls)))
