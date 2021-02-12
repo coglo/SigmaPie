@@ -32,15 +32,15 @@ class GraphGrammar():
             graph.add_node(character + "." + str(i))
         for i in range(len(word)-1):
             if i == 0:
-                graph.add_edge(word[i] + "." + str(i), word[i+1] + "." + str(i+1), blockers={})
+                graph.add_edge(word[i] + "." + str(i), word[i+1] + "." + str(i+1), label={})
             else:
                 try:
                     edge_values = graph.edges[(word[i] + "." + str(i), word[i+1] + "." + str(i+1))]
-                    blockers = edge_values['blockers']
-                    new_blockers = blockers - set(word[:i])
-                    graph.add_edge(word[i] + "." + str(i), word[i+1] + "." + str(i+1), blockers=new_blockers)
+                    labels = edge_values['label']
+                    new_labels = labels - set(word[:i+1])
+                    graph.add_edge(word[i] + "." + str(i), word[i+1] + "." + str(i+1), label=new_labels)
                 except KeyError:
-                    graph.add_edge(word[i] + "." + str(i), word[i+1] + "." + str(i+1), blockers=self.alphabet - set(word[:i]))  # Maybe off by one error.
+                    graph.add_edge(word[i] + "." + str(i), word[i+1] + "." + str(i+1), label=self.alphabet - set(word[:i+1]))  
         return graph
 
     def word_list_graph(self, word_list):
@@ -53,7 +53,7 @@ class GraphGrammar():
         plt.subplot(121)
         pos = nx.spring_layout(self.graph)
         nx.draw_networkx_edge_labels(self.graph, pos,
-                                     edge_labels={edge: ' '.join(self.graph.edges[edge]['blockers']) for edge in self.graph.edges},
+                                     edge_labels={edge: ' '.join(self.graph.edges[edge]['label']) for edge in self.graph.edges},
                                      font_color='red')
         nx.draw(self.graph, with_labels=True, font_weight='bold')
 

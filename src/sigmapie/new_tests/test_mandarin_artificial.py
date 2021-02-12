@@ -80,7 +80,7 @@ def evaluate_models(evaluator, data, datan, tsl=True):
         print("TSL polarity:", tsl_h.check_polarity())
     print("MTSL polarity:", mtsl_h.check_polarity())
     '''
-    print("test data")
+    print("data")
     print("SL", sl_h.percent_grammatical(data))
     print("SP", sp_h.percent_grammatical(data))
     print("TSL", tsl_h.percent_grammatical(data))
@@ -89,7 +89,7 @@ def evaluate_models(evaluator, data, datan, tsl=True):
     #print(datan[0:20], "\n")
     #evaluator(datan)
     
-    print("Non word data")
+    print("datan")
     print("SL", sl_h.percent_grammatical(datan))
     print("SP", sp_h.percent_grammatical(datan))
     print("TSL", tsl_h.percent_grammatical(datan))

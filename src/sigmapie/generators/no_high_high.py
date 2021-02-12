@@ -54,13 +54,14 @@ def no_high_high_bad(length = 10):
     if length < 1:
         raise ValueError("The string has a very weird length.")
 
-    word = ["y"]
-    for i in range(length-2):
+    word = []
+    for i in range(length):
         selection = choice(sigma)
         word.append(selection)
-    selection1 = choice(["i","u"])
-    word.append(selection1)
-    string = "".join(word) 
+
+    w = "".join(word)    
+    string = w.replace(choice(list(w)), "y") + choice(["i", "u"])
+    
     return(string)
 
 def generate_nhh_bad(n = 10, length = 10):

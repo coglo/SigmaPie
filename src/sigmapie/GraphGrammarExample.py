@@ -15,6 +15,6 @@ def show_graph(data):
 
 
 # ipython   %pylab   g.plot_graph()
-show_graph(generate_nll(n=500))
-g = show_graph(generate_nll(n=500))
+#show_graph(generate_nll(n=500, length=4))
+g = show_graph(generate_nll(n=10000, length=4))
 print(g.graph.edges, g.graph.nodes)

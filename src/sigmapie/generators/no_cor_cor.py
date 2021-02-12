@@ -48,13 +48,12 @@ def no_cor_cor_bad(length = 10):
         raise ValueError("The string has a very weird length.")
 
     word = []
-    for i in range(length-2):
+    for i in range(length):
         selection = choice(sigma)
         word.append(selection)
-    for i in range(2):
-        selection1 = choice(["y","i"])
-        word.append(selection1)
-    string = "".join(word)
+
+    w = "".join(word)
+    string = w.replace(choice(list(w)), choice(["i", "y"])) + choice(["i", "y"])
     return(string)
 
 

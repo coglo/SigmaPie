@@ -42,17 +42,16 @@ def evaluate_graphmodels(evaluator, data, datan):
     #evaluator(datan)
 
     evaluator(graph_model.generate_sample(1000))
-    print("sample:",graph_model.generate_sample(100))
+    #print("sample:",graph_model.generate_sample(100))
     #print(graph_model.percent_grammatical(data))
     #print(datan[0:20], "\n")
-    #print(graph_model.percent_grammatical(datan))
+    print(graph_model.percent_grammatical(datan))
 
     #print("alphabet:", graph_model.alphabet)
     #print("restricted pairs:", graph_model.restricted_pairs)
     #print("Graphmodel sample:", graph_model.generate_sample(10), "\n")
     #print("edges and nodes:", graph_model.show_graph_edges(data), "\n")
 
-'''
 def test_no_lab_lab_generated():
     evaluate_graphmodels(evaluate_nll_words, generate_nll(n=1000), generate_nll_bad(n=1000))
 
@@ -118,7 +117,6 @@ def test_vowel_frontness():
     bad_data = bad_data_1 + bad_data_2
     evaluate_graphmodels(evaluate_vfr_words, real_data, bad_data)
 
-'''
 def get_masked_mandarin_words(keep_list=["a", "e", "n", "ɑ","ŋ","n", "ə", "u", "y", "i", "t"]):
     with open('C:/Users/19061/git/phomo/phomo/mandarin_words.csv', encoding="utf-8-sig", newline='') as f:
         reader = csv.reader(f)
@@ -158,7 +156,6 @@ def test_no_high_high_masked():
     bad_data = [w.replace(choice(list(w)), "y") + choice(["i", "u"])  for w in mask_data]
     evaluate_graphmodels(evaluate_nhh_words, mask_data, bad_data)
 
-'''
 def test_no_vc_masked():
     mask_data = get_masked_mandarin_words(keep_list=["a", "e", "ɑ", "ə", "u", "y", "i", "o", "p", "b", "m", "f", "t", "d", "l", "ts", "tsʰ", "s", "tʂ", "tʂʰ", "ʂ", "ʐ", "tɕ", "tɕʰ", "ɕ", "k", "g", "h"])
     bad_data = [w.replace(choice(list(w)), choice(["a", "e", "ɑ", "ə", "u", "y", "i", "o"])+choice(list(w))+choice(cons_ls))  for w in mask_data]
@@ -177,4 +174,3 @@ def test_vowel_frontness_masked():
     bad_data_2 = [w.replace(w[-1], choice(["iə", "yə"])) for w in mask_data[int(len(mask_data)/2):]]
     bad_data = bad_data_1 + bad_data_2
     evaluate_graphmodels(evaluate_vfr_words, mask_data, bad_data)
-'''

@@ -34,13 +34,12 @@ def no_lab_lab_bad(length = 10):
         raise ValueError("The string has a very weird length.")
 
     word = []
-    for i in range(length-2):
+    for i in range(length):
         selection = choice(sigma)
         word.append(selection)
-    for i in range(2):
-        selection1 = choice(["y","u"])
-        word.append(selection1)
-    string = "".join(word)
+
+    w = "".join(word)
+    string = w.replace(choice(list(w)), choice(["u", "y"])) + choice(["u", "y"])
     return(string)
 
 def generate_nll(n = 10, length = 10):
@@ -60,4 +59,5 @@ def generate_nll(n = 10, length = 10):
 
 def generate_nll_bad(n = 10, length = 10):
     return [no_lab_lab_bad(length=length) for i in range(n)]
+
 
