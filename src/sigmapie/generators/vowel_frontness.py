@@ -25,7 +25,8 @@ def vowel_frontness(length = 10):
         
     string = "".join([choice(sigma) for i in range(length)])
     word = ">" + string + "<"
-    word = word.replace("iə<", "ie<").replace("yə<", "ye<").replace("iən", "ien").replace("yən", "yen").replace("au", "ɑu").replace("aŋ", "ɑŋ")
+    #word = word.replace("iə", "ie").replace("yə", "ye").replace("au", "ɑu").replace("aŋ", "ɑŋ")
+    word = word.replace("au", "ɑu").replace("aŋ", "ɑŋ")
     return word[1:length+1] 
 
 def vowel_frontness_io(length = 10):
@@ -67,7 +68,8 @@ def vowel_frontness_io(length = 10):
     else:
         return ((string, string))
     '''  
-    word = word.replace("iə<", "ie<").replace("yə<", "ye<").replace("iən", "ien").replace("yən", "yen").replace("au", "ɑu").replace("aŋ", "ɑŋ")
+    #word = word.replace("iə<", "ie<").replace("yə<", "ye<").replace("iən", "ien").replace("yən", "yen").replace("au", "ɑu").replace("aŋ", "ɑŋ")
+    word = word.replace("au", "ɑu").replace("aŋ", "ɑŋ")
     return ((string, word[1:length+1])) 
 
 def generate_vfr(n = 10, length = 10):
@@ -107,9 +109,9 @@ def vowel_frontness_bad(length = 10):
         
     string = "".join([choice(sigma) for i in range(length)])
     word = ">" + string + "<"
-    word = word.replace("i<", "iə<").replace("y<", "yə<").replace("n", choice(["yən","iən"])).replace("u", "au").replace("ŋ", "aŋ")
+    #word = word.replace("i<", "iə<").replace("y<", "yə<").replace("n", choice(["yən","iən"])).replace("u", "au").replace("ŋ", "aŋ")
+    word = word.replace("u", "au").replace("ŋ", "aŋ")
     return word[1:(length+1)] 
-
 
 def generate_vfr_bad(n = 10, length = 10):
     return [vowel_frontness_bad(length=length) for i in range(n)]

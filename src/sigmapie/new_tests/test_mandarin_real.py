@@ -1,7 +1,7 @@
 from sigmapie.generators.no_lab_lab import generate_nll, no_lab_lab, generate_nll_bad, no_lab_lab_bad
 from sigmapie.evaluators.no_lab_lab import evaluate_nll_words 
-from sigmapie.generators.no_cor_cor import generate_ncc, no_cor_cor, generate_ncc_bad, no_cor_cor_bad
-from sigmapie.evaluators.no_cor_cor import evaluate_ncc_words
+from sigmapie.generators.no_fro_fro import generate_nff, no_fro_fro, generate_nff_bad, no_fro_fro_bad
+from sigmapie.evaluators.no_fro_fro import evaluate_nff_words
 from sigmapie.generators.no_high_high import generate_nhh, no_high_high, generate_nhh_bad, no_high_high_bad
 from sigmapie.evaluators.no_high_high import evaluate_nhh_words
 from sigmapie.generators.no_vc import generate_nvc, no_vc, generate_nvc_bad, no_vc_bad
@@ -70,7 +70,27 @@ def evaluate_models(evaluator, data, datan, tsl=True):
     if tsl:
         evaluator(tsl_h.generate_sample(n=100, repeat=True))
     evaluator(mtsl_h.generate_sample(n=100, repeat=True))
+    
+    print("SL sample:", sl_h.generate_sample(20, repeat=False), "\n")
+    print("SP sample:", sp_h.generate_sample(20, repeat=False), "\n")
+    if tsl:
+        print("TSL tier:", tsl_h.tier)
+        print("TSL sample:", tsl_h.generate_sample(20, repeat=False), "\n")
+    print("MTSL tiers:", mtsl_h.tier)
+    print("MTSL sample:", mtsl_h.generate_sample(20, repeat=False))
+
+    print("SL alphabet:", sl_h.alphabet)
+    print("SP alphabet:", sp_h.alphabet)
+    if tsl:
+        print("TSL alphabet:", tsl_h.alphabet)
+    print("MTSL alphabet:", mtsl_h.alphabet)
+
     '''
+    print("SL grammar:", sl_h.grammar)
+    print("SP grammar:", sp_h.grammar)
+    print("TSL grammar:", tsl_h.grammar)
+    print("MTSL grammar:", mtsl_h.grammar)
+
     print("SL k:", sl_h.k)
     print("SL sample:", sl_h.generate_sample(5, repeat=False), "\n")
     print("SP sample:", sp_h.generate_sample(5, repeat=False), "\n")
@@ -150,10 +170,10 @@ def test_no_lab_lab():
     bad_data = [w.replace(choice(list(w)), choice(["u", "y"])) + choice(["u", "y"]) for w in real_data]
     evaluate_models(evaluate_nll_words, real_data, bad_data)
 
-def test_no_cor_cor():
+def test_no_fro_fro():
     real_data = get_mandarin_words()
     bad_data = [w.replace(choice(list(w)), choice(["i", "y"])) + choice(["i", "y"]) for w in real_data]
-    evaluate_models(evaluate_ncc_words, real_data, bad_data)
+    evaluate_models(evaluate_nff_words, real_data, bad_data)
 
 def test_no_high_high():
     real_data = get_mandarin_words()
@@ -167,16 +187,16 @@ def test_no_vc():
 
 def test_schwa_roundness():
     real_data = get_mandarin_words()
-    bad_data_1 = [w.replace(choice(list(w)), "əu") for w in real_data[0:int(len(real_data)/2)]]
-    bad_data_2 = [w.replace(w[-1], "uə") for w in real_data[int(len(real_data)/2):]]
-    bad_data = bad_data_1 + bad_data_2
-    evaluate_models(evaluate_sro_words, real_data, bad_data)
+    bad_data_1 = [w.replace(choice(list(w)), "əu") for w in real_data]
+    #bad_data_2 = [w.replace(w[-1], "uə") for w in real_data[int(len(real_data)/2):]]
+    #bad_data = bad_data_1 + bad_data_2
+    evaluate_models(evaluate_sro_words, real_data, bad_data_1)
 
 def test_vowel_frontness():
     real_data = get_mandarin_words()
-    bad_data_1 = [w.replace(choice(list(w)), choice(["iən", "yən", "au", "aŋ"])) for w in real_data[0:int(len(real_data)/2)]]
-    bad_data_2 = [w.replace(w[-1], choice(["iə", "yə"])) for w in real_data[int(len(real_data)/2):]]
-    bad_data = bad_data_1 + bad_data_2
-    evaluate_models(evaluate_vfr_words, real_data, bad_data)
+    bad_data_1 = [w.replace(choice(list(w)), choice(["au", "aŋ"])) for w in real_data]
+    #bad_data_2 = [w.replace(w[-1], choice(["iə", "yə"])) for w in real_data[int(len(real_data)/2):]]
+    #bad_data = bad_data_1 + bad_data_2
+    evaluate_models(evaluate_vfr_words, real_data, bad_data_1)
  
  

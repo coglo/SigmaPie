@@ -13,10 +13,10 @@ def evaluate_sro_words(data):
     word_ls = []
     for w in data:
         word = ">" + w + "<"
-        if "əu" in word or "uo<" in word or "ou" in word or "uə<" in word:
+        if "ə" in word or "u" in word or "o" in word:
             word_ls.append(word)
     for wd in set(word_ls):
-        if "uə<" not in wd and "əu" not in wd: 
+        if "əu" not in wd: 
             correct += 1
 
     #sum = len(data) - irrelevant
@@ -42,7 +42,7 @@ def evaluate_sro_io(data):
     
         SF1 = ">" + SF + "<"
 
-        if "uə<" not in SF1 and "əu" not in SF1:
+        if "uə" not in SF1 and "əu" not in SF1:
             correct += 1
         
     ratio = (correct / len(data))

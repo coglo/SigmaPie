@@ -22,7 +22,7 @@ def schwa_roundness(length = 10):
         
     string = "".join([choice(sigma) for i in range(length)])
     word = ">" + string + "<"
-    word = word.replace("uə<", "uo<").replace("əu", "ou")
+    word = word.replace("əu", "ou")
     return word[1:length+1]
 
 
@@ -45,7 +45,7 @@ def schwa_roundness_io(length = 10):
     string = "".join([choice(sigma) for i in range(length)])
     word = ">" + string + "<"
 
-    word = word.replace("uə<", "uo<").replace("əu", "ou")
+    word = word.replace("uə", "uo").replace("əu", "ou")
     return ((string, word[1:length+1])) 
 
 def generate_sro(n = 10, length = 10):
@@ -92,7 +92,7 @@ def schwa_roundness_bad(length = 10):
         
     string = "".join([choice(sigma) for i in range(length)])
     word = ">" + string + "<"
-    word = word.replace("u<", "uə<").replace("u", "əu")
+    word = word.replace("u", "əu")
     return word[1:length+1]
 
 def generate_sro_bad(n = 10, length = 10):

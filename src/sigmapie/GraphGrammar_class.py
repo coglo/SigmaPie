@@ -132,10 +132,7 @@ class GraphGrammar():
         self.plot_graph()
         return self.graph.edges, self.graph.nodes
 
-    def percent_grammatical(self, wordlist):
-        return sum([self.gramatical(word) for word in wordlist])/len(wordlist)
-
-    def gramatical(self, word):
+    def grammatical(self, word):
         for i in range(len(word)-1):
             if (word[i]+ "." + str(i), word[i+1]+ "." + str(i+1)) not in self.graph.edges:
                 return False
@@ -143,3 +140,7 @@ class GraphGrammar():
             if found_pairs.intersection(self.restricted_pairs):
                 return False
         return True
+        
+    def percent_grammatical(self, wordlist):
+        return sum([self.gramatical(word) for word in wordlist])/len(wordlist)
+

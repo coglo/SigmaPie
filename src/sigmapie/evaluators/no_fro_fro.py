@@ -1,7 +1,7 @@
-def evaluate_ncc_words(data):
+def evaluate_nff_words(data):
     """
     Evaluates the provided words with respect to the rule 
-    of no_cor_cor.
+    of no_fro_fro.
     
     Arguments:
     * data (list[str]): a list of strings tht need to be evaluated;

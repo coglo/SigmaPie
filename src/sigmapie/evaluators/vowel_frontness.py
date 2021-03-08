@@ -17,13 +17,15 @@ def evaluate_vfr_words(data):
     Results:
     * Prints the report that shows if the data follows the rule.
     """
-    restrictions = ["iə<", "yə<", "iən", "yən", "au", "aŋ"]
+    #restrictions = ["iə<", "yə<", "iən", "yən", "au", "aŋ"]
+    restrictions = ["au", "aŋ"]
 
     # Mark start and end of words.
     #print(f"Percentage of vfr well-formed words: {int(ratio * 100)}%.")
 
-    sigma = {"a", "ə", "i", "y", "n", "u", "ŋ"}
-    relevant_ls = {"iə<", "yə<", "iən", "yən", "au", "aŋ", "ie<", "ye<", "ien", "yen", "ɑu", "ɑŋ"}
+    #sigma = {"a", "ə", "i", "y", "n", "u", "ŋ"}
+    #relevant_ls = {"iə<", "yə<", "iən", "yən", "au", "aŋ", "ie<", "ye<", "ien", "yen", "ɑu", "ɑŋ"}
+    relevant_ls = {"au", "aŋ", "ɑu", "ɑŋ"}
     correct = 0
     word_ls = []
     for w in data:

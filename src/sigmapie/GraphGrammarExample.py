@@ -1,5 +1,5 @@
 from sigmapie.generators.no_lab_lab import generate_nll, no_lab_lab
-from sigmapie.generators.no_cor_cor import generate_ncc, no_cor_cor
+from sigmapie.generators.no_fro_fro import generate_nff, no_fro_fro
 from sigmapie.generators.no_high_high import generate_nhh, no_high_high
 from sigmapie.generators.no_vc import generate_nvc, no_vc 
 from sigmapie.generators.schwa_roundness import generate_sro, generate_sro_io, schwa_roundness, schwa_roundness_io
